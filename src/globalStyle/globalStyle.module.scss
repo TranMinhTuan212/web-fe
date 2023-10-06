@@ -1,0 +1,55 @@
+
+
+:root{
+    --pink-color: #9b4de0;
+    --background-001: #120822;
+    --background-002: #130c1c;
+    --background-003: #170f23;
+    --background-004: #231b2e;
+    --hover-max-color: #40384e;
+    --hover-min-color: #6a6474;
+    --text-normal: #ffffff;
+    --text-medium: #b6b5ba;
+    --text-mini: #898491;
+    --danger-color: #cd2323;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 62.5%;
+    user-select: none;
+}
+
+body{
+    font-size: 1.6rem;
+    line-height: 1.5;
+    text-rendering: optimizeSpeed;
+    background-color: var(--background-default);
+}
+
+input{
+    outline: none;
+    border: none;
+}
+
+button{
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+
+ul, li{
+    padding: 0;
+    list-style: none;
+}
+
+select{
+    border: none;
+    outline: none;
+}

@@ -1,0 +1,18 @@
+.wapper{
+    color: var(--text-normal);
+}
+
+.option{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.item{
+    text-decoration: none;
+    color: var(--text-normal);
+
+    &:hover{
+        color: var(--text-medium);
+    }
+}
