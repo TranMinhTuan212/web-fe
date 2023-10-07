@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
 import styles from "./sideBar.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faAngleRight, faAtom } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft, faAngleRight, faAtom, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import Menu from "../menu";
 import { faShopify } from "@fortawesome/free-brands-svg-icons";
 import { pages } from "~/config";
@@ -34,6 +34,7 @@ function SideBar({width, onWidth}) {
       <div className={cx("list-menu")}>
           <Menu to={pages.home} icon={faAtom} width={width} name="Trang Chủ"/>
           <Menu to={pages.shop} icon={faShopify} width={width} name="Mua Sắm"/>
+          <Menu to={pages.addProduct} icon={faCirclePlus} width={width} name="Thêm Sản Phẩm"/>
       </div>
     </div>
   );

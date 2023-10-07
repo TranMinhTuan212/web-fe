@@ -1,6 +1,7 @@
 import { pages } from "~/config";
 import DefaultLayout from "~/layouts/defaultLayout/defauluLayout";
 import LoginLayout from "~/layouts/loginLayout";
+import AddProduct from "~/pages/add-product";
 import ForestPassword from "~/pages/forest-password";
 import Home from "~/pages/home";
 import Login from "~/pages/login";
@@ -23,5 +24,8 @@ export const publicRoutes = [
     },
     {
         path: pages.shop, layout: DefaultLayout, page: Shop
+    },
+    {
+        path: pages.addProduct, layout: DefaultLayout, page: AddProduct
     }
 ]

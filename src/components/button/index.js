@@ -9,18 +9,12 @@ function Button({
     icon = false,
     onSubmit = ()=>{},
     large = false,
-    outlinePrimary = false,
-    outlineDanger = false,
     danger = false,
     textButton = false,
-    topicButton = false,
-    backgroundDark = false,
-    backgroundLight = false,
     disable = false,
-    xanh = false
 }) {
         
-    const classnames = cx('wapper',{ backgroundLight, backgroundDark, large, outlinePrimary, danger, outlineDanger, textButton, topicButton, disable, xanh})
+    const classnames = cx('wapper',{ large, danger, textButton, disable })
 
     return (
         <div onClick={ !disable ? onSubmit : ()=>{}} className={classnames}>

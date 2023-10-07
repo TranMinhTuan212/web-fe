@@ -3,5 +3,6 @@ export const pages = {
     login: '/login',
     shop: '/shop',
     register: '/register',
-    forestPassword: '/forest-password'
+    forestPassword: '/forest-password',
+    addProduct: '/add-product',
 }

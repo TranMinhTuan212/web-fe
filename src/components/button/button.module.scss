@@ -33,52 +33,20 @@
     padding: 1rem 4rem;
 }
 
-.outlinePrimary{
-    background-color: #fff;
-    border: solid .3rem var(--primary);
-    color: var(--primary);
-    font-weight: bold;
-}
-
-.outlineDanger{
-    background-color: #fff;
-    border: solid .3rem var(--danger);
-    color: var(--danger);
-    font-weight: bold;
-}
-
 .textButton{
     width: 100%;
     border-radius: 0;
     padding: 1rem 1.4rem;
-    background-color: var(--background-light);
-    color: black;
+    background-color: var(--pink-lack-color);
+    color: var(--text-normal);
 
     .icon{
         margin-right: .4rem;
     }
 
     &:last-child{
-        border-bottom: .1rem solid #ccc;
+        border-bottom: .1rem solid var(--pink-color);
     }
-}
-
-.topicButton{
-    background-color: var(--background-light);
-    border-bottom-left-radius: 0rem;
-    border-bottom-right-radius: 0rem;
-    color: black;
-    font-size: 3rem;
-    font-weight: bold;
-    opacity: .7;
-}
-
-.backgroundDark{
-    background-color: var(--background-default);
-}
-
-.backgrounLight{
-    background-color: var(--background-light);
 }
 
 .danger{
@@ -92,8 +60,4 @@
     &:hover{
         opacity: .8 !important;
     }
-}
-
-.xanh{
-    background-color: green;
 }
