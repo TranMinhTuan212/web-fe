@@ -3,7 +3,7 @@ import styles from "./form-login.module.scss";
 import Input from "../input";
 import Button from "../button";
 import { useRef, useState } from "react";
-import { isEmail, notEmpty, validateForm } from "~/validation";
+import { isEmail, max30, notEmpty, validateForm } from "~/validation";
 import { useGlobalState } from "~/provider/useGlobalState";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -26,13 +26,13 @@ function FormLogin() {
   function handleSubmit() {
     let flag = true;
 
-    const validateEmail = validateForm(email, [isEmail, notEmpty]);
+    const validateEmail = validateForm(email, [isEmail, notEmpty, max30]);
     if (typeof validateEmail === "string") {
       flag = false;
       emailRef.current.textContent = validateEmail;
     }
 
-    const validatePassword = validateForm(password, [notEmpty]);
+    const validatePassword = validateForm(password, [notEmpty, max30]);
     if (typeof validatePassword === "string") {
       flag = false;
       passwordRef.current.textContent = validatePassword;
