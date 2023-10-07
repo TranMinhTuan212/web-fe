@@ -7,7 +7,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useGlobalState } from "~/provider/useGlobalState";
 import { setLoading, setPopup } from "~/provider/action";
-import { isEmail, notEmpty, validateForm } from "~/validation";
+import { isEmail, max30, max50, min6, notEmpty, validateForm } from "~/validation";
 import { useRef } from "react";
 import { message } from "~/enum";
 import { apiLink } from "~/key";
@@ -32,25 +32,25 @@ function FormRegister() {
   function handleSubmit() {
     let flag = true;
 
-    const validateEmail = validateForm(email, [isEmail, notEmpty]);
+    const validateEmail = validateForm(email, [isEmail, notEmpty, max50]);
     if (typeof validateEmail === "string") {
       flag = false;
       emailRef.current.textContent = validateEmail;
     }
 
-    const validateName = validateForm(name, [notEmpty]);
+    const validateName = validateForm(name, [notEmpty, max50]);
     if (typeof validateName === "string") {
       flag = false;
       nameRef.current.textContent = validateName;
     }
 
-    const validatePassword = validateForm(password, [notEmpty]);
+    const validatePassword = validateForm(password, [notEmpty, max30, min6]);
     if (typeof validatePassword === "string") {
       flag = false;
       passwordRef.current.textContent = validatePassword;
     }
 
-    const validateConfirmPassword = validateForm(confirmPassword, [notEmpty]);
+    const validateConfirmPassword = validateForm(confirmPassword, [notEmpty, max30]);
     if (typeof validateConfirmPassword === "string") {
       flag = false;
       confirmPasswordRef.current.textContent = validateConfirmPassword;
@@ -101,6 +101,7 @@ function FormRegister() {
         setState={setEmail}
         topic="Nhập email"
         required={true}
+        medium
       />
       <Input
         setRef={nameRef}
@@ -108,6 +109,7 @@ function FormRegister() {
         setState={setName}
         topic="Nhập tên"
         required={true}
+        medium
       />
       <Input
         setRef={passwordRef}
@@ -116,6 +118,7 @@ function FormRegister() {
         type="password"
         topic="Nhập mật khẩu"
         required={true}
+        medium
       />
       <Input
         setRef={confirmPasswordRef}
@@ -124,6 +127,7 @@ function FormRegister() {
         type="password"
         topic="Nhập lại mật khẩu"
         required={true}
+        medium
       />
       <div className={cx("option", "mb-5")}>
         <div>

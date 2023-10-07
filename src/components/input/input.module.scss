@@ -8,16 +8,13 @@
     border-color: transparent;
     outline: none;
     background-color: var(--hover-max-color);
+    border-radius: 1rem;
+    height: 3.4rem;
+    width: 100%;
 
     &:focus{
         background-color: var(--hover-min-color);
     }
-}
-
-.medium{
-    border-radius: 1rem;
-    height: 3.4rem;
-    width: 50rem;
 }
 
 .message{
@@ -25,10 +22,18 @@
     margin-top: 1rem;
 }
 
+.area{
+    height: 10rem !important;
+}
+
+.medium{
+    width: 50rem;
+}
+
 .large{
     width: 100%;
 }
 
 .small{
-    width: 30rem;
+    width: 35rem;
 }

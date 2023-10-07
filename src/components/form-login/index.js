@@ -78,6 +78,7 @@ function FormLogin() {
         setState={setEmail}
         topic="Nhập email"
         required={true}
+        medium
       />
       <Input
         type="password"
@@ -86,6 +87,7 @@ function FormLogin() {
         setState={setPassword}
         topic="Nhập mật khẩu"
         required={true}
+        medium
       />
       <div className={cx("option", "mb-5")}>
         <div>

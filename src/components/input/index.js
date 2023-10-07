@@ -13,7 +13,9 @@ function Input({
     required = false,
     disabled = false,
     small = false,
-    large = false
+    large = false,
+    medium = false,
+    area
 
 }) {
 
@@ -32,10 +34,15 @@ function Input({
     
     }
 
+    let Tag = 'input'
+    if(area){
+        Tag = 'textArea'
+    }
+
     return ( 
-        <div className={cx('wapper')}>
+        <div className={cx('wapper', {medium}, {small}, {large}, {area})}>
             <span className={cx('')}>{topic}</span> {required && <span className={cx('text-danger', 'fs-4')}>*</span>} <br/>
-            <input disabled={disabled} onBlur={e=>{handleValidate(e)}} value={state} className={cx('my-input','medium', {small}, {large})} onChange={e=>handleValidate(e)} type={type} name='text'/> <br/>
+            <Tag disabled={disabled} onBlur={e=>{handleValidate(e)}} value={state} className={cx('my-input', {area})} onChange={e=>handleValidate(e)} type={type} name='text'/> <br/>
             <span ref={setRef} className={cx('message')}></span>
         </div>
      );

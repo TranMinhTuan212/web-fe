@@ -55,6 +55,34 @@ function isCategory(value) {
   return true;
 }
 
+function max30(value){
+  if(value.length > 30){
+    return message.MAX_30
+  }
+  return true
+}
+
+function max50(value){
+  if(value.length > 50){
+    return message.MAX_50
+  }
+  return true
+}
+
+function max100(value){
+  if(value.length > 100){
+    return message.MAX_100
+  }
+  return true
+}
+
+function min6(value){
+  if(value.length < 6){
+    return message.MIN_SIZE
+  }
+  return true
+}
+
 function typeFile(file) {
   if (!file) return message.NOT_EMPTY;
   if (typeof notEmpty(file.name) === "string") return message.NOT_EMPTY;
@@ -92,5 +120,9 @@ export {
   typeFile,
   validateForm,
   isCategory,
-  isEmail
+  isEmail,
+  max30,
+  max50,
+  max100,
+  min6
 };

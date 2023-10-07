@@ -2,8 +2,10 @@
 const message = {
   IS_NUMBER: "Vui lòng nhập chữ số !!",
   NOT_EMPTY: "Trường này không được để trống !!",
-  MAX_SIZE: "Kích thước quá lớn, vui lòng kiểm tra lại !!",
-  MIN_SIZE: "Kích thước quá nhỏ, vui lòng kiểm tra lại !!",
+  MAX_30: "Độ dài tối đa là 30 kí tự, vui lòng kiểm tra lại !!",
+  MAX_50: "Độ dài tối đa là 50 kí tự, vui lòng kiểm tra lại !!",
+  MAX_100: "Độ dài tối đa là 100 kí tự, vui lòng kiểm tra lại !!",
+  MIN_SIZE: "Độ dài tối thiểu là 6 kí tự, vui lòng kiểm tra lại !!",
   IS_CATEGORY: "Chọn danh mục !!",
   FILE_FORMAT: "file không hợp lệ !!",
   IS_EMAIL: "Email không hợp lệ !",
