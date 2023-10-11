@@ -1,0 +1,12 @@
+    version: '3'
+    services:          
+        shoppe-fake:
+            build: 
+                context : .
+                args:
+                    ENV: staging 
+
+            container_name: web-shoppe-fake
+            restart: always
+            ports:
+                - "8080:80"
