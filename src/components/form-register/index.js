@@ -74,17 +74,12 @@ function FormRegister() {
       axios
         .post(`${apiLink}user/register`, formData)
         .then((res) => {
-          if (res.data.status === 200) {
             dispatch(setLoading(false));
             navigate(pages.login)
             dispatch(setPopup({ type: true, text: res.data?.message }));
-          } else {
-            dispatch(setLoading(false));
-            dispatch(setPopup({ type: false, text: res.data?.message }));
-          }
         })
-        .catch((_) => {
-          dispatch(setPopup({ type: false, text: "Internal Server Error !" }));
+        .catch((e) => {
+          dispatch(setPopup({ type: false, text: e.response?.data?.message }));
           dispatch(setLoading(false));
         });
     }

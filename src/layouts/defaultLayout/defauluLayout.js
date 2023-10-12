@@ -3,11 +3,15 @@ import styles from "./defaultLayout.module.scss";
 import SideBar from "~/components/sideBar";
 import Content from "~/components/content";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { userKey } from "~/key";
+import { pages } from "~/config";
 
 const cx = classNames.bind(styles);
 
 function DefaultLayout({ children }) {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [max, setWidth] = useState(true);
 
@@ -15,12 +19,12 @@ function DefaultLayout({ children }) {
     setWidth((width) => !width);
   }
 
-  // useEffect(()=>{
-  //   const user = JSON.parse(localStorage.getItem(userKey))
-  //   if(!user){
-  //     navigate(pages.login)
-  //   }
-  // }, [])
+  useEffect(()=>{
+    const user = JSON.parse(localStorage.getItem(userKey))
+    if(!user){
+      navigate(pages.login)
+    }
+  }, [])
 
   return (
     <div className={cx("wapper")}>
