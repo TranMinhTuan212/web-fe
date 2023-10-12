@@ -1,12 +1,10 @@
-import { SET_LOADING, SET_POPUP } from "./constant"
-
-
+import { SET_LOADING, SET_LOGIN, SET_POPUP } from "./constant"
 
 export const initState = {
     isLoading: false,
-    popup: null
+    popup: null,
+    user: null
 }
-
 
 export const reducer = (state, action) => {
     switch(action.type){
@@ -19,6 +17,11 @@ export const reducer = (state, action) => {
             return {
                 ...state,
                 popup: action.payload
+            }
+        case SET_LOGIN:
+            return {
+                ...state,
+                user: action.payload
             }
         default :
         return new Error('action is not valid !')

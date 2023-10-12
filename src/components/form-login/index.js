@@ -7,7 +7,7 @@ import { isEmail, max30, notEmpty, validateForm } from "~/validation";
 import { useGlobalState } from "~/provider/useGlobalState";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { setLoading, setPopup } from "~/provider/action";
+import { setLoading, setLogin, setPopup } from "~/provider/action";
 import { apiLink, userKey } from "~/key";
 import { pages } from "~/config";
 
@@ -49,20 +49,18 @@ function FormLogin() {
       axios
         .post(`${apiLink}user/login`, formData)
         .then((res) => {
-          if (res.data.status === 200) {
+          if (res.data?.status === 200) {
             // save user info
-            const user = res.data
+            const user = res.data?.data
+            dispatch(setLogin(user))
             localStorage.setItem(userKey, JSON.stringify(user))
             navigate(pages.home)
             dispatch(setLoading(false));
-          } else {
-            dispatch(setLoading(false));
-            dispatch(setPopup({ type: false, text: res.data?.message }));
           }
         })
-        .catch((_) => {
-          dispatch(setPopup({ type: false, text: "Internal Server Error !"}));
+        .catch((res) => {
           dispatch(setLoading(false));
+          dispatch(setPopup({ type: false, text: res.response.data?.message }));
         });
     }
   }
