@@ -1,0 +1,44 @@
+.wapper{
+    padding: 1rem;
+    margin-bottom: 3rem;
+}
+
+.image{
+    width: 22rem;
+    height: 16rem;
+}
+
+.image-item{
+    width: 100%;
+    height: 100%;
+    border-radius: .6rem;
+}
+
+.name, .price {
+    text-align: center;
+    color: var(--text-normal);
+    white-space: nowrap;
+    overflow: hidden;
+     text-overflow: ellipsis;
+     max-width: 22rem;
+}
+
+.name{
+    margin-top: .6rem;
+}
+
+.price{
+    font-size: 1.4rem;
+}
+
+.star{
+    display: flex;
+    justify-content: center;
+    color: var(--warm-color);
+}
+
+.button{
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}

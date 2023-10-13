@@ -17,6 +17,10 @@
     }
 }
 
+.disabled{
+    background-color: var(--hover-min-color);
+}
+
 .message{
     color: var(--danger-color);
     margin-top: 1rem;

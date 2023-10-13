@@ -5,4 +5,5 @@ export const pages = {
     register: '/register',
     forestPassword: '/forest-password',
     addProduct: '/add-product',
+    profile: '/profile',
 }

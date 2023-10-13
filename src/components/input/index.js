@@ -42,7 +42,7 @@ function Input({
     return ( 
         <div className={cx('wapper', {medium}, {small}, {large}, {area})}>
             <span className={cx('')}>{topic}</span> {required && <span className={cx('text-danger', 'fs-4')}>*</span>} <br/>
-            <Tag disabled={disabled} onBlur={e=>{handleValidate(e)}} value={state} className={cx('my-input', {area})} onChange={e=>handleValidate(e)} type={type} name='text'/> <br/>
+            <Tag disabled={disabled} onBlur={e=>{handleValidate(e)}} value={state} className={cx('my-input', {area}, {disabled})} onChange={e=>handleValidate(e)} type={type} name='text'/> <br/>
             <span ref={setRef} className={cx('message')}></span>
         </div>
      );
