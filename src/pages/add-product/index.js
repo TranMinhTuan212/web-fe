@@ -42,17 +42,18 @@ function AddProduct() {
   const [discount, setDiscount] = useState("");
   const [origin, setOrigin] = useState("");
   const [unit, setUnit] = useState("");
+  const [image, setImage] = useState("");
 
   const [selectImage, setSelectImage] = useState();
-  const [categories, setCategories] = useState([]);
+  const [category, setCategories] = useState("");
+
+  const [categoryList, setCategoryList] = useState([])
 
   const [photoMessage, setPhotoMessage] = useState("");
 
   const [categotyId, setCategoryId] = useState("");
 
   const uploadRef = useRef();
-
-  const categoryRef = useRef();
 
   function handleUpload() {
     const file = uploadRef.current.files[0];
@@ -63,9 +64,27 @@ function AddProduct() {
     };
     if (file) {
       reader.readAsDataURL(file);
+      setImage(file.name)
     }
     setPhotoMessage("");
   }
+
+useEffect(()=>{
+  dispatch(setLoading(true))
+  axios.get(`${apiLink}category/all`)
+  .then((res)=>{ 
+    const list = []
+    res.data?.data.forEach(element => {
+      list.push({ value: element._id, label: element.name })
+    });
+    setCategoryList(list)
+    dispatch(setLoading(false))
+  })
+  .catch((res)=>{
+    dispatch(setLoading(false))
+    dispatch(setPopup({ type: false, text: res.response.data?.message }))
+  })
+}, [])
 
   function handleSubmit() {
     let flag = true;
@@ -106,95 +125,53 @@ function AddProduct() {
       setPhotoMessage(fileValidate);
     }
 
-    const categoryValidate = validateForm(categotyId, [isCategory]);
-    if (typeof categoryValidate === "string") {
-      flag = false;
-      categoryRef.current.textContent = categoryValidate;
-    }
-
     if (flag) {
-      const formData = new FormData();
-      formData.append("name", name);
-      formData.append("barcode", barcode);
-      formData.append("price", price);
-      formData.append("description", description);
-      formData.append("discount", discount);
-      formData.append("categoryId", categotyId);
-      formData.append("file", uploadRef.current.files[0]);
-      dispatch(setLoading(true));
-
-      const user = JSON.parse(localStorage.getItem(userKey))
-
-      if (!user) {
-        return navigate(pages.login);
+      const data = {
+        name,
+        barcode,
+        price,
+        description,
+        discount,
+        categotyId,
+        image,
+        origin,
+        unit
       }
-      const headers = {
-        Authorization: `Bearer ${user.accessToken}`,
-      };
-      axios
-        .post(`${apiLink}product/create-product`, formData, { headers })
-        .then((response) => {
-          if (response.data.status === 200) {
-            dispatch(setPopup({ type: true, text: response.data.message }))
-          } else {
-            if(response.data.status === 500){
-              dispatch(setPopup({ type: false, text: response.data.message }))
-            }else{
-              dispatch(setPopup({ type: false, text: 'Có lỗi, thử lại sau !' }))
-            }
-          }
-          resetInput();
-        })
-        .then(() => dispatch(setLoading(false)))
-        .catch((error)=>{
-          if(error.response && error.response.status === 401){
-            localStorage.setItem(userKey, null)
-            navigate(pages.login)
-          }else{
-            resetInput();
-            dispatch(setPopup({ type: false, text: 'Có lỗi, thử lại sau !' }))
-          }
-          dispatch(setLoading(false))
-        })
-      
+      // dispatch(setLoading(true));
+console.log(data) 
+      // const user = JSON.parse(localStorage.getItem(userKey))
+
+      // if (!user) {
+      //   return navigate(pages.login);
+      // }
+      // const headers = {
+      //   Authorization: `Bearer ${user.accessToken}`,
+      // };
+      // dispatch(setLoading(true))
+      // axios
+      //   .post(`${apiLink}product/create-product`, formData, { headers })
+      //   .then((res) => {
+      //     dispatch(setPopup({ type: true, text: res.data.data?.message }))
+      //     dispatch(setLoading(false))
+      //     resetInput();
+      //   })
+      //   .then(() => dispatch(setLoading(false)))
+      //   .catch((res)=>{
+      //     dispatch(setLoading(false))
+      //     dispatch(setPopup({ type: false, text: res.data.data?.message }))
+      //   })
     }
   }
 
-  function resetInput() {
-    setName("");
-    setPrice("");
-    setDescription("");
-    setDiscount("");
-    setCategoryId("");
-    setSelectImage("");
-    resetCategoryRef.current.selectedIndex = 0;
-  }
-
-  // useEffect(() => {
-  //   const user = JSON.parse(localStorage.getItem(userKey))
-  //   if(!user){
-  //     navigate(pages.login)
-  //     alert('Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại')
-  //   }
-  //   const headers = {
-  //     Authorization: `Bearer ${user.accessToken}`
-  //   }
-  //   dispatch(setLoading(true));
-  //   axios
-  //     .get(`${apiLink}category/get-all-category`, { headers })
-  //     .then((response) => setCategories(response.data.data))
-  //     .then(() => dispatch(setLoading(false)))
-  //     .catch((error)=>{
-  //       if(error.response && error.response.status === 401){
-  //         localStorage.setItem(userKey, null)
-  //         navigate(pages.login)
-  //       }else{
-  //         resetInput();
-  //         dispatch(setPopup({ type: false, text: 'Có lỗi, thử lại sau !' }))
-  //       }
-  //       dispatch(setLoading(false))
-  //     })
-  // }, []);
+  // function resetInput() {
+  //   setName("");
+  //   setPrice("");
+  //   setDescription("");
+  //   setDiscount("");
+  //   setCategoryId("");
+  //   setSelectImage("");
+  //   resetCategoryRef.current.selectedIndex = 0;
+  // }
 
   return (
     <div className={cx("wapper")}>
@@ -288,7 +265,7 @@ function AddProduct() {
           required={true}
           small
         />
-        <Select values={[{ value: 1, label: 'tuấn' }]} color="#6a6474" className={cx("my-dropdown")} options={[{ value: 1, label: 'tuấn' }, { value: 2, label: 'phong' }, { value: 3, label: 'phong' }, { value: 4, label: 'phong' }]}/>
+        <Select onChange={e=>{setCategories(e[0]?.value)}} values={[categoryList[0] || {_id: 1, label: ''}]} color="#6a6474" className={cx("my-dropdown")} options={categoryList || []}/>
         <Input
           setRef={descriptionMessageRef}
           topic={"Mô tả sản phẩm"}

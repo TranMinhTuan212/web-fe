@@ -1,0 +1,49 @@
+.wapper{
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.topic{
+    color: var(--text-normal);
+}
+
+.navbar{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.my-dropdown{
+    background-color: var(--hover-max-color);
+    border: none !important;
+    width: 35rem !important;
+    border-radius: 1rem !important;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    margin-left: 2rem;
+
+    div[role]{
+        background-color: var(--hover-max-color);
+        border: none !important;
+        border-radius: .6rem !important;
+
+        span[role]{
+            border: none !important;
+
+            &:hover{
+                background-color: var(--hover-min-color) !important;
+            }
+        }
+    }
+}
+
+.table{
+    overflow: hidden;
+    overflow: scroll;
+    flex: 1;
+}
+
+.table::-webkit-scrollbar {
+    width: 0rem;
+}

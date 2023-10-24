@@ -6,7 +6,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 const cx = classNames.bind(styles)
 
-function Product() {
+function Product({ onClick = ()=>{} }) {
     return ( 
         <div className={cx('wapper')}>
             <div className={cx('image')}>
@@ -23,7 +23,7 @@ function Product() {
                 <FontAwesomeIcon icon={faStar}/>
                 </div>
             </div>
-            <div className={cx('button')}><Button text="Thêm vào giỏ hàng"/></div>
+            <div className={cx('button')}><Button onSubmit={onClick} text="Thêm vào giỏ hàng"/></div>
         </div>
      );
 }

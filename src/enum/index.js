@@ -9,7 +9,8 @@ const message = {
   IS_CATEGORY: "Chọn danh mục !!",
   FILE_FORMAT: "file không hợp lệ !!",
   IS_EMAIL: "Email không hợp lệ !",
-  CONFIRM_PASSWORD: "Xác nhận mật khẩu không hợp lệ !"
+  CONFIRM_PASSWORD: "Xác nhận mật khẩu không hợp lệ !",
+  IS_PHONE: "Sô điện thoại không hợp lệ !"
 }
 
 const PRODUCT_STATUS = {

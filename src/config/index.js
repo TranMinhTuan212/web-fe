@@ -6,4 +6,7 @@ export const pages = {
     forestPassword: '/forest-password',
     addProduct: '/add-product',
     profile: '/profile',
+    order: '/order',
+    product: '/product',
+    productDetail: '/productDetail',
 }

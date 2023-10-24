@@ -1,0 +1,34 @@
+.wapper {
+}
+
+table {
+  font-family: arial, sans-serif;
+  border: none;
+  border-collapse: inherit !important;
+  width: 100%;
+  border-spacing: 0 !important;
+}
+
+td,
+th {
+  text-align: left;
+  padding: 8px;
+  background-color: var(--background-003);
+  color: var(--text-normal);
+}
+
+td, tr{
+    border: none !important;
+}
+
+tr:hover{
+    cursor: pointer;
+    td{
+        background-color: var(--hover-max-color) !important;
+    }
+}
+
+.remove-style {
+  text-decoration: none;
+  color: var(--text-medium);
+}

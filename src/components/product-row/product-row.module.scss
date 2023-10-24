@@ -1,0 +1,51 @@
+.wapper{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 1rem;
+    padding: .3rem 0;
+    text-decoration: none;
+
+    &:hover{
+        background-color: var(--hover-max-color);
+    }
+}
+
+.photo{
+    width: 10%;
+}
+
+.image{
+    width: 4rem;
+    height: 4rem;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+.text{
+    color: var(--text-normal);
+}
+
+.name{
+    width: 25%;
+}
+
+.price{
+    width: 15%;
+}
+
+.origin{
+    width: 15%;
+}
+
+.unit{
+    width: 10%;
+}
+
+.quantity{
+    width: 15%;
+}
+
+.discount{
+    width: 10%;
+}

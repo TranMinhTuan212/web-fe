@@ -1,0 +1,24 @@
+.wapper{
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.topic{
+    color: var(--text-normal);
+}
+
+.navbar{
+    display: flex;
+    justify-content: start;
+}
+
+.list{
+    flex: 1;
+    overflow: hidden;
+    overflow: scroll;
+}
+
+.list::-webkit-scrollbar {
+    width: 0rem;
+}

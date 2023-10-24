@@ -15,7 +15,10 @@ function Input({
     small = false,
     large = false,
     medium = false,
-    area
+    area,
+    className = false,
+    left = false,
+    right = false
 
 }) {
 
@@ -40,7 +43,7 @@ function Input({
     }
 
     return ( 
-        <div className={cx('wapper', {medium}, {small}, {large}, {area})}>
+        <div className={cx('wapper', {medium}, {small}, {large}, {area}, {className}, {left}, {right})}>
             <span className={cx('')}>{topic}</span> {required && <span className={cx('text-danger', 'fs-4')}>*</span>} <br/>
             <Tag disabled={disabled} onBlur={e=>{handleValidate(e)}} value={state} className={cx('my-input', {area}, {disabled})} onChange={e=>handleValidate(e)} type={type} name='text'/> <br/>
             <span ref={setRef} className={cx('message')}></span>

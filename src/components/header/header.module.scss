@@ -44,8 +44,8 @@
 }
 
 .user{
-    width: 5rem;
-    height: 5rem;   
+    width: 4rem;
+    height: 4rem;   
     position: relative;
     cursor: pointer;
 }
@@ -85,4 +85,8 @@
     right: 0;
     width: 20rem;
     background-color: var(--text-normal);
+}
+
+.logout{
+    margin-right: 2rem;
 }

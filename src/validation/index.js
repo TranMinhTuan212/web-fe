@@ -48,6 +48,16 @@ function isEmail(email) {
   }
 }
 
+function isPhone(phoneNumber) {
+  const pattern = /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/;
+  const match = pattern.test(phoneNumber);
+
+  if(match){
+    return true
+  }
+  return message.IS_PHONE
+}
+
 function isCategory(value) {
   if (typeof isNumber(value) === "string") {
     return message.IS_CATEGORY;
@@ -56,28 +66,28 @@ function isCategory(value) {
 }
 
 function max30(value){
-  if(value.length > 30){
+  if(value && value.length > 30){
     return message.MAX_30
   }
   return true
 }
 
 function max50(value){
-  if(value.length > 50){
+  if(value && value.length > 50){
     return message.MAX_50
   }
   return true
 }
 
 function max100(value){
-  if(value.length > 100){
+  if(value && value.length > 100){
     return message.MAX_100
   }
   return true
 }
 
 function min6(value){
-  if(value.length < 6){
+  if(value && value.length < 6){
     return message.MIN_SIZE
   }
   return true
@@ -124,5 +134,6 @@ export {
   max30,
   max50,
   max100,
-  min6
+  min6,
+  isPhone
 };

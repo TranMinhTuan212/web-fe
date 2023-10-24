@@ -36,6 +36,7 @@ function Header() {
                 </div>
             </div>
             <div className={cx('header-right')}>
+            <div className={cx('logout')}><Button text="Đăng Xuất"/></div>
                 <div className={cx('user')}>
                     <div className={cx('user-avatar')}>
                     <img className={cx('avatar')} src={process.env.PUBLIC_URL + "/images/phong.jpg"} alt=""/>

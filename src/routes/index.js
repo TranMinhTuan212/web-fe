@@ -5,6 +5,9 @@ import AddProduct from "~/pages/add-product";
 import ForestPassword from "~/pages/forest-password";
 import Home from "~/pages/home";
 import Login from "~/pages/login";
+import Order from "~/pages/order";
+import Product from "~/pages/product";
+import ProductDetail from "~/pages/product-detail";
 import Profile from "~/pages/profile";
 import Register from "~/pages/register";
 import Shop from "~/pages/shop";
@@ -31,5 +34,14 @@ export const publicRoutes = [
     },
     {
         path: pages.profile, layout: DefaultLayout, page: Profile
+    },
+    {
+        path: pages.order, layout: DefaultLayout, page: Order
+    },
+    {
+        path: pages.product, layout: DefaultLayout, page: Product
+    },
+    {
+        path: pages.productDetail, layout: DefaultLayout, page: ProductDetail
     }
 ]
