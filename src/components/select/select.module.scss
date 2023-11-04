@@ -1,0 +1,24 @@
+.my-dropdown{
+    background-color: var(--hover-max-color);
+    border: none !important;
+    width: 35rem !important;
+    border-radius: 1rem !important;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    color: var(--text-medium);
+    
+
+    div[role]{
+        background-color: var(--hover-max-color);
+        border: none !important;
+        border-radius: .6rem !important;
+
+        span[role]{
+            border: none !important;
+
+            &:hover{
+                background-color: var(--hover-min-color) !important;
+            }
+        }
+    }
+}

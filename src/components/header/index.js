@@ -72,10 +72,10 @@ function Header() {
               />
             </div>
             <div className={cx("user-option-item")}>
-              <Button icon={faUser} textButton text="Cá Nhân" />
+              <Button onSubmit={()=>navigate(pages.profile)} icon={faUser} textButton text="Cá Nhân" />
             </div>
             <div className={cx("user-option-item")}>
-              <Button icon={faKey} textButton text="Đổi Mật Khẩu" />
+              <Button onSubmit={()=>navigate(pages.password)} icon={faKey} textButton text="Đổi Mật Khẩu" />
             </div>
             <div className={cx("user-option-item")}>
               <Button icon={faGear} textButton text="Cài Đặt" />

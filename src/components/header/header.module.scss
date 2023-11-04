@@ -54,6 +54,10 @@
     display: block;
 }
 
+.user-option:active{
+    display: none;
+}
+
 .user-option::after{
     position: absolute;
     content: "";

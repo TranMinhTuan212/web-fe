@@ -10,10 +10,9 @@ function Product() {
     <div className={cx("wapper")}>
       <h1 className={cx("topic")}>Quản lí sản phẩm</h1>
       <div className={cx("navbar")}>
-        <Input small right />
-        <Input small right />
-        <Input small />
+        <Input search placeHolder="Tìm kiếm sản phẩm" small right />
       </div>
+      <ProductRow topic/>
       <div className={cx("list")}>
         <ProductRow/>
         <ProductRow/>

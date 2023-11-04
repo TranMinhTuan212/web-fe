@@ -10,5 +10,7 @@ export const pages = {
     orderDetail: '/order-detail',
     product: '/product',
     productDetail: '/productDetail',
-    cart: '/cart'
+    cart: '/cart',
+    password: '/password',
+    user: '/user'
 }

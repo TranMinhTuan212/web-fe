@@ -13,6 +13,8 @@ import Register from "~/pages/register";
 import Shop from "~/pages/shop";
 import OrderDetail from "~/pages/order/order-detail";
 import Cart from "~/pages/cart";
+import Password from "~/pages/password";
+import User from "~/pages/user";
 
 
 export const publicRoutes = [
@@ -51,5 +53,11 @@ export const publicRoutes = [
     },
     {
         path: pages.cart, layout: DefaultLayout, page: Cart
+    },
+    {
+        path: pages.password, layout: DefaultLayout, page: Password
+    },
+    {
+        path: pages.user, layout: DefaultLayout, page: User
     }
 ]

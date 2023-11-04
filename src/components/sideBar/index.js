@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
 import styles from "./sideBar.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faAngleRight, faAtom, faCartShopping, faCirclePlus, faListCheck, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft, faAngleRight, faAtom, faCartShopping, faCirclePlus, faKey, faListCheck, faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
 import Menu from "../menu";
 import { faShopify } from "@fortawesome/free-brands-svg-icons";
 import { pages } from "~/config";
@@ -23,7 +23,7 @@ function SideBar({width, onWidth}) {
         </div>
         }
         {
-            width && <div className={cx("shop-name")}>SUPERMARKET</div>
+            width && <div className={cx("shop-name")}>Shopee Fake</div>
         }
         <div className={cx('navigation')}>
             { width && <div onClick={onWidth} className={cx('navigation-item')}><FontAwesomeIcon icon={faAngleLeft} /></div> }
@@ -39,6 +39,8 @@ function SideBar({width, onWidth}) {
           <Menu to={pages.addProduct} icon={faCirclePlus} width={width} name="Thêm Sản Phẩm"/>
           <Menu to={pages.profile} icon={faUser} width={width} name="Cá Nhân"/>
           <Menu to={pages.cart} icon={faCartShopping} width={width} name="Giỏ Hàng"/>
+          <Menu to={pages.password} icon={faKey} width={width} name="Đổi Mật khẩu"/>
+          <Menu to={pages.user} icon={faUser} width={width} name="Người Dùng"/>
       </div>
     </div>
   );

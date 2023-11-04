@@ -17,7 +17,7 @@ import { apiLink, userKey } from "~/key";
 import { useNavigate } from "react-router-dom";
 import { pages } from "~/config";
 import { setLoading, setPopup } from "~/provider/action";
-import Select from "react-dropdown-select";
+import Select from "~/components/select";
 
 const cx = classNames.bind(styles);
 
@@ -47,7 +47,7 @@ function AddProduct() {
   const [selectImage, setSelectImage] = useState();
   const [category, setCategories] = useState("");
 
-  const [categoryList, setCategoryList] = useState([])
+  const [categoryList, setCategoryList] = useState([]);
 
   const [photoMessage, setPhotoMessage] = useState("");
 
@@ -64,27 +64,27 @@ function AddProduct() {
     };
     if (file) {
       reader.readAsDataURL(file);
-      setImage(file.name)
+      setImage(file.name);
     }
     setPhotoMessage("");
   }
 
-// useEffect(()=>{
-//   dispatch(setLoading(true))
-//   axios.get(`${apiLink}category/all`)
-//   .then((res)=>{ 
-//     const list = []
-//     res.data?.data.forEach(element => {
-//       list.push({ value: element._id, label: element.name })
-//     });
-//     setCategoryList(list)
-//     dispatch(setLoading(false))
-//   })
-//   .catch((res)=>{
-//     dispatch(setLoading(false))
-//     dispatch(setPopup({ type: false, text: res.response.data?.message }))
-//   })
-// }, [])
+  // useEffect(()=>{
+  //   dispatch(setLoading(true))
+  //   axios.get(`${apiLink}category/all`)
+  //   .then((res)=>{
+  //     const list = []
+  //     res.data?.data.forEach(element => {
+  //       list.push({ value: element._id, label: element.name })
+  //     });
+  //     setCategoryList(list)
+  //     dispatch(setLoading(false))
+  //   })
+  //   .catch((res)=>{
+  //     dispatch(setLoading(false))
+  //     dispatch(setPopup({ type: false, text: res.response.data?.message }))
+  //   })
+  // }, [])
 
   function handleSubmit() {
     let flag = true;
@@ -135,10 +135,10 @@ function AddProduct() {
         categotyId,
         image,
         origin,
-        unit
-      }
+        unit,
+      };
       // dispatch(setLoading(true));
-console.log(data) 
+      console.log(data);
       // const user = JSON.parse(localStorage.getItem(userKey))
 
       // if (!user) {
@@ -212,71 +212,79 @@ console.log(data)
           Thêm thông tin sản phẩm
         </h2>
 
-        <div className={cx('inputs')}>
-        <Input
-          setRef={nameMessageRef}
-          topic={"Tên sản phẩm"}
-          state={name}
-          setState={setName}
-          required={true}
-          small
-        />
-        <Input
-          setRef={barcodeMessageRef}
-          topic={"Mã sản phẩm"}
-          state={barcode}
-          setState={setBarcode}
-          required={true}
-          small
-        />
-        <Input
-          type="number"
-          setRef={priceMessageRef}
-          topic={"Giá sản phẩm"}
-          state={price}
-          setState={setPrice}
-          required={true}
-          small
-        />
-        <Input
-          type="number"
-          setRef={discountMessageRef}
-          topic={"Chiết khấu (%)"}
-          state={discount}
-          setState={setDiscount}
-          required={true}
-          small
-        />
-        <Input
-          type="text"
-          setRef={originMessageRef}
-          topic={"Xuất xứ"}
-          state={origin}
-          setState={setOrigin}
-          required={true}
-          small
-        />
-        <Input
-          type="text"
-          setRef={unitMessageRef}
-          topic={"Đơn vị"}
-          state={unit}
-          setState={setUnit}
-          required={true}
-          small
-        />
-        <Select onChange={e=>{setCategories(e[0]?.value)}} values={[categoryList[0] || {_id: 1, label: ''}]} color="#6a6474" className={cx("my-dropdown")} options={categoryList || []}/>
-        <Input
-          setRef={descriptionMessageRef}
-          topic={"Mô tả sản phẩm"}
-          state={description}
-          required={true}
-          setState={setDescription}
-          large
-          area
-        />
+        <div className={cx("inputs")}>
+          <Input
+            setRef={nameMessageRef}
+            topic={"Tên sản phẩm"}
+            state={name}
+            setState={setName}
+            required={true}
+            small
+          />
+          <Input
+            setRef={barcodeMessageRef}
+            topic={"Mã sản phẩm"}
+            state={barcode}
+            setState={setBarcode}
+            required={true}
+            small
+          />
+          <Input
+            type="number"
+            setRef={priceMessageRef}
+            topic={"Giá sản phẩm"}
+            state={price}
+            setState={setPrice}
+            required={true}
+            small
+          />
+          <Input
+            type="number"
+            setRef={discountMessageRef}
+            topic={"Chiết khấu (%)"}
+            state={discount}
+            setState={setDiscount}
+            required={true}
+            small
+          />
+          <Input
+            type="text"
+            setRef={originMessageRef}
+            topic={"Xuất xứ"}
+            state={origin}
+            setState={setOrigin}
+            required={true}
+            small
+          />
+          <Input
+            type="text"
+            setRef={unitMessageRef}
+            topic={"Đơn vị"}
+            state={unit}
+            setState={setUnit}
+            required={true}
+            small
+          />
+          <Select
+            onChange={(e) => {
+              setCategories(e[0]?.value);
+            }}
+            value={categoryList[0]}
+            data={categoryList}
+          />
+          <Input
+            setRef={descriptionMessageRef}
+            topic={"Mô tả sản phẩm"}
+            state={description}
+            required={true}
+            setState={setDescription}
+            large
+            area
+          />
         </div>
-        <div className={cx('button')}><Button onSubmit={handleSubmit} icon={faAdd} text="Thêm" /></div>
+        <div className={cx("button")}>
+          <Button onSubmit={handleSubmit} icon={faAdd} text="Thêm" />
+        </div>
       </div>
     </div>
   );

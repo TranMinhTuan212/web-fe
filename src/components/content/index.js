@@ -9,7 +9,7 @@ function Content({ children }) {
   return (
     <div className={cx("wapper")}>
 
-    <header className={cx('header')}><Header/></header>
+    <div className={cx('header')}><Header/></div>
       
       <div className={cx("content")}>{children}</div>
     </div>

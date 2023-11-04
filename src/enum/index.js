@@ -13,20 +13,30 @@ const message = {
   IS_PHONE: "Sô điện thoại không hợp lệ !"
 }
 
-const PRODUCT_STATUS = {
-  ON_SALE: "ON_SALE",
-  INTERRUPTIVE: "INTERRUPTIVE",
-  OUT_OF_STOCK: "OUT_OF_STOCK",
-  WAITING_APPROVE: "WAITING_APPROVE",
+const ERole = {
+  user: "USER",
+  admin: "ADMIN",
 };
 
-const ROLE = {
-  SUPPLIER: "SUPPLIER",
-  STORE: "STORE",
-};
+const EOrderStatus = {
+  waitingApprove: 'WAITING_APPROVE',
+  delivering: 'DELIVERING',
+  cancelled: 'CANCELLED',
+  delivered: 'DELIVERED'
+}
+
+const OrderStatusList = [
+  { label: 'Tất cả', value: 'ALL' },
+  { label: 'Chờ xác nhận', value: 'WAITING_APPROVE' },
+  { label: 'Đang giao', value: 'DELIVERING' },
+  { label: 'Đã hủy', value: 'CANCELLED' },
+  { label: 'Đã nhận', value: 'DELIVERED' }
+]
 
 export {
-  PRODUCT_STATUS,
-  ROLE,
-  message
+  ERole,
+  message,
+  EOrderStatus,
+  OrderStatusList
 };
+
