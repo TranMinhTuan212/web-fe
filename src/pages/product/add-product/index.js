@@ -69,22 +69,22 @@ function AddProduct() {
     setPhotoMessage("");
   }
 
-useEffect(()=>{
-  dispatch(setLoading(true))
-  axios.get(`${apiLink}category/all`)
-  .then((res)=>{ 
-    const list = []
-    res.data?.data.forEach(element => {
-      list.push({ value: element._id, label: element.name })
-    });
-    setCategoryList(list)
-    dispatch(setLoading(false))
-  })
-  .catch((res)=>{
-    dispatch(setLoading(false))
-    dispatch(setPopup({ type: false, text: res.response.data?.message }))
-  })
-}, [])
+// useEffect(()=>{
+//   dispatch(setLoading(true))
+//   axios.get(`${apiLink}category/all`)
+//   .then((res)=>{ 
+//     const list = []
+//     res.data?.data.forEach(element => {
+//       list.push({ value: element._id, label: element.name })
+//     });
+//     setCategoryList(list)
+//     dispatch(setLoading(false))
+//   })
+//   .catch((res)=>{
+//     dispatch(setLoading(false))
+//     dispatch(setPopup({ type: false, text: res.response.data?.message }))
+//   })
+// }, [])
 
   function handleSubmit() {
     let flag = true;

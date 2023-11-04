@@ -3,6 +3,7 @@ import styles from "./order.module.scss";
 import Select from "react-dropdown-select";
 import Input from "~/components/input";
 import Table from "~/components/table";
+import { pages } from "~/config";
 
 const cx = classNames.bind(styles);
 
@@ -11,7 +12,7 @@ function Order() {
     "Mã đơn hàng",
     "Tình trạng",
     "Thời gian",
-    "Cửa hàng"
+    "Tổng đơn giá"
   ];
 
   return (
@@ -19,16 +20,9 @@ function Order() {
         <h1 className={cx("topic")}>Quản Lí Đơn Hàng</h1>
         <div className={cx("navbar")}>
           <Input small type="text" />
-          <Select
-            onChange={(e) => {}}
-            values={[{ _id: 1, label: "" }]}
-            color="#6a6474"
-            className={cx("my-dropdown")}
-            options={[{ value: "1", label: "Danh mục" }]}
-          />
         </div>
         <div className={cx("table")}>
-          <Table titleTable={titleTable} />
+          <Table to={pages.orderDetail} titleTable={titleTable} />
         </div>
     </div>
   );

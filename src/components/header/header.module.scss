@@ -90,3 +90,16 @@
 .logout{
     margin-right: 2rem;
 }
+
+.cart{
+    width: 4rem;
+    height: 4rem;
+    font-size: 3rem;
+    margin-right: 2rem;
+    color: var(--text-normal);
+    cursor: pointer;
+
+    &:hover{
+        opacity: .8;
+    }
+}

@@ -1,0 +1,50 @@
+.wapper{
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.topic{
+    color: var(--text-normal);
+    margin-bottom: 3rem;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+}
+
+.information{
+    display: flex;
+}
+
+.content{
+    flex: 1;
+    overflow: hidden;
+    overflow: scroll;
+}
+
+.content::-webkit-scrollbar {
+    width: 0rem;
+}
+
+.user{
+    width: 60%;
+}
+
+.admin{
+    width: 40%;
+}
+
+.info{
+    color: var(--text-medium);
+    font-size: 1.8rem;
+}
+
+.sub-topic{
+    margin-top: 3rem;
+    color: var(--text-normal);
+    margin-bottom: 3rem;
+    font-size: 2rem;
+}
+
+.hr{
+    color: var(--pink-color);
+}

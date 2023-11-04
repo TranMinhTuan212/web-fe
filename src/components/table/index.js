@@ -178,22 +178,22 @@ function Table({ titleTable, to, data = [] }) {
           {data.map((product, index) => (
             <tr key={index}>
               <td>
-                <Link className={cx("remove-style")} to={to + `/${product.id}`}>
+                <Link className={cx("remove-style")} to={to + `?id=${product.id}`}>
                   {product.code}
                 </Link>
               </td>
               <td>
-                <Link className={cx("remove-style")} to={to + `/${product.id}`}>
+                <Link className={cx("remove-style")} to={to + `?id=${product.id}`}>
                   {product.category}
                 </Link>
               </td>
               <td>
-                <Link className={cx("remove-style")} to={to + `/${product.id}`}>
+                <Link className={cx("remove-style")} to={to + `?id=${product.id}`}>
                   {product.store}
                 </Link>
               </td>
               <td>
-                <Link className={cx("remove-style")} to={to + `/${product.id}`}>
+                <Link className={cx("remove-style")} to={to + `?id=${product.id}`}>
                   {product.price}
                 </Link>
               </td>

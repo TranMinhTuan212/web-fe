@@ -43,10 +43,10 @@ function Profile() {
   const detailRef = useRef();
   const uploadRef = useRef();
 
-  const user = JSON.parse(localStorage.getItem(userKey))
-    const headers = {
-      Authorization: 'Bearer '+ user.accsess_token
-    }
+  // const user = JSON.parse(localStorage.getItem(userKey))
+  //   const headers = {
+  //     Authorization: 'Bearer '+ user.accsess_token
+  //   }
 
   function handleUpload() {
     const file = uploadRef.current.files[0];
@@ -122,28 +122,28 @@ function Profile() {
     // console.log(data)
   }
 
-  useEffect(()=>{
+  // useEffect(()=>{
     
-    dispatch(setLoading(true))
-    axios.get(`${apiLink}user/me-profile`, { headers })
-    .then((res)=>{
-      setEmail(res.data?.data?.email)
-      setCode(res.data?.data?.code)
-      setName(res.data?.data?.name)
-      setPhone(res.data?.data?.phone)
-      setProvince(res.data?.data?.province)
-      setDistrict(res.data?.data?.district)
-      setAward(res.data?.data?.award)
-      setDetail(res.data?.data?.detail)
-      setAvatar(res.data?.data?.avatar)
+  //   dispatch(setLoading(true))
+  //   axios.get(`${apiLink}user/me-profile`, { headers })
+  //   .then((res)=>{
+  //     setEmail(res.data?.data?.email)
+  //     setCode(res.data?.data?.code)
+  //     setName(res.data?.data?.name)
+  //     setPhone(res.data?.data?.phone)
+  //     setProvince(res.data?.data?.province)
+  //     setDistrict(res.data?.data?.district)
+  //     setAward(res.data?.data?.award)
+  //     setDetail(res.data?.data?.detail)
+  //     setAvatar(res.data?.data?.avatar)
 
-      dispatch(setLoading(false))
-    })
-    .catch((res)=>{
-      dispatch(setLoading(false)) 
-      dispatch(setPopup({ type: false, text: res.response.data.message }))
-    })
-  }, [])
+  //     dispatch(setLoading(false))
+  //   })
+  //   .catch((res)=>{
+  //     dispatch(setLoading(false)) 
+  //     dispatch(setPopup({ type: false, text: res.response.data.message }))
+  //   })
+  // }, [])
 
   return (
     <div className={cx("wapper")}>

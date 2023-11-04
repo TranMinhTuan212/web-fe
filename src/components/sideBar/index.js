@@ -38,6 +38,7 @@ function SideBar({width, onWidth}) {
           <Menu to={pages.product} icon={faListCheck} width={width} name="Sản Phẩm"/>
           <Menu to={pages.addProduct} icon={faCirclePlus} width={width} name="Thêm Sản Phẩm"/>
           <Menu to={pages.profile} icon={faUser} width={width} name="Cá Nhân"/>
+          <Menu to={pages.cart} icon={faCartShopping} width={width} name="Giỏ Hàng"/>
       </div>
     </div>
   );

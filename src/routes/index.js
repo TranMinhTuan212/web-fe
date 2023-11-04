@@ -1,16 +1,18 @@
 import { pages } from "~/config";
 import DefaultLayout from "~/layouts/defaultLayout/defauluLayout";
 import LoginLayout from "~/layouts/loginLayout";
-import AddProduct from "~/pages/add-product";
+import AddProduct from "~/pages/product/add-product";
 import ForestPassword from "~/pages/forest-password";
 import Home from "~/pages/home";
 import Login from "~/pages/login";
 import Order from "~/pages/order";
 import Product from "~/pages/product";
-import ProductDetail from "~/pages/product-detail";
+import ProductDetail from "~/pages/product/product-detail";
 import Profile from "~/pages/profile";
 import Register from "~/pages/register";
 import Shop from "~/pages/shop";
+import OrderDetail from "~/pages/order/order-detail";
+import Cart from "~/pages/cart";
 
 
 export const publicRoutes = [
@@ -43,5 +45,11 @@ export const publicRoutes = [
     },
     {
         path: pages.productDetail, layout: DefaultLayout, page: ProductDetail
+    },
+    {
+        path: pages.orderDetail, layout: DefaultLayout, page: OrderDetail
+    },
+    {
+        path: pages.cart, layout: DefaultLayout, page: Cart
     }
 ]

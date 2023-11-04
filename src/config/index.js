@@ -7,6 +7,8 @@ export const pages = {
     addProduct: '/add-product',
     profile: '/profile',
     order: '/order',
+    orderDetail: '/order-detail',
     product: '/product',
     productDetail: '/productDetail',
+    cart: '/cart'
 }
