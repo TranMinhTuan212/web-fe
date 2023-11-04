@@ -3,6 +3,7 @@ import styles from "./order-detail.module.scss";
 import { Link } from "react-router-dom";
 import { pages } from "~/config";
 import ProductRow from "~/components/product-row";
+import Button from "~/components/button";
 
 const cx = classNames.bind(styles);
 
@@ -190,7 +191,13 @@ function OrderDetail() {
       </div>
         <hr className={cx('hr')}/>
       <div className={cx('content')}>
+            <div className={cx('sub-header')}>
             <h1 className={cx("sub-topic")}>Danh sách sản phẩm</h1>
+            <div className={cx('cancel-button')}>
+            <Button text="Xác nhận"/>
+            <Button danger text="Hủy đơn hàng"/>
+            </div>
+            </div>
             <div className={cx('products')}>
                 <ProductRow/>
                 <ProductRow/>

@@ -14,7 +14,8 @@ import Shop from "~/pages/shop";
 import OrderDetail from "~/pages/order/order-detail";
 import Cart from "~/pages/cart";
 import Password from "~/pages/password";
-import User from "~/pages/user";
+import User from "~/pages/customer";
+import Announce from "~/pages/announce";
 
 
 export const publicRoutes = [
@@ -59,5 +60,8 @@ export const publicRoutes = [
     },
     {
         path: pages.user, layout: DefaultLayout, page: User
+    },
+    {
+        path: pages.announce, layout: DefaultLayout, page: Announce
     }
 ]

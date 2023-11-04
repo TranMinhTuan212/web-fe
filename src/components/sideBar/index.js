@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
 import styles from "./sideBar.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faAngleRight, faAtom, faCartShopping, faCirclePlus, faKey, faListCheck, faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft, faAngleRight, faAtom, faBell, faCartShopping, faCirclePlus, faKey, faListCheck, faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
 import Menu from "../menu";
 import { faShopify } from "@fortawesome/free-brands-svg-icons";
 import { pages } from "~/config";
@@ -41,6 +41,7 @@ function SideBar({width, onWidth}) {
           <Menu to={pages.cart} icon={faCartShopping} width={width} name="Giỏ Hàng"/>
           <Menu to={pages.password} icon={faKey} width={width} name="Đổi Mật khẩu"/>
           <Menu to={pages.user} icon={faUser} width={width} name="Người Dùng"/>
+          <Menu to={pages.announce} icon={faBell} width={width} name="Thông Báo"/>
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ const cx = classNames.bind(styles)
 function ProductRow({ topic = false }) {
     if(topic){
         return ( 
-            <div className={cx('wapper')}>
+            <div className={cx('topic')}>
                 <div className={cx('photo')}>
                 <div className={cx('image', 'text')}></div>
                 </div>

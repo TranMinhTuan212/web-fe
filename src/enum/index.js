@@ -14,7 +14,7 @@ const message = {
 }
 
 const ERole = {
-  user: "USER",
+  customer: "CUSTOMER",
   admin: "ADMIN",
 };
 

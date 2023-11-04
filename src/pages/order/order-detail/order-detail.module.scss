@@ -43,6 +43,19 @@
     color: var(--text-normal);
     margin-bottom: 3rem;
     font-size: 2rem;
+    width: 70%;
+}
+
+.sub-header{
+    display: flex;
+    align-items: center;
+}
+
+.cancel-button{
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-normal);
 }
 
 .hr{

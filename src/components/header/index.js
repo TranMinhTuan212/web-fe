@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowLeftLong,
   faArrowRightLong,
+  faBell,
   faCartShopping,
   faGear,
   faKey,
@@ -46,6 +47,11 @@ function Header() {
         </div>
       </div>
       <div className={cx("header-right")}>
+        <div 
+         onClick={()=>navigate(pages.announce)}
+         className={cx("cart")}>
+          <FontAwesomeIcon icon={faBell} />
+        </div>
         <div 
          onClick={()=>navigate(pages.cart)}
          className={cx("cart")}>

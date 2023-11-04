@@ -1,14 +1,14 @@
 import classNames from "classnames/bind";
-import styles from './user.module.scss'
+import styles from './announce.module.scss'
 
 const cx = classNames.bind(styles)
 
-function User() {
+function Announce() {
     return ( 
         <div className={cx('wapper')}>
-            <h1>Quản Lý User</h1>
+            <h1>Đây là trang thông báo</h1>
         </div>
      );
 }
 
-export default User;
+export default Announce;
