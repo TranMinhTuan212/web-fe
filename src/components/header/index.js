@@ -35,10 +35,10 @@ function Header() {
     <div className={cx("wrapper")}>
       <div className={cx("header-left")}>
         <div className={cx("navigation")}>
-          <div className={cx("arow-left", "arow")}>
+          <div onClick={()=>navigate(-1)} className={cx("arow-left", "arow")}>
             <FontAwesomeIcon icon={faArrowLeftLong} />
           </div>
-          <div className={cx("arow-right", "arow")}>
+          <div onClick={()=>navigate(1)} className={cx("arow-right", "arow")}>
             <FontAwesomeIcon icon={faArrowRightLong} />
           </div>
         </div>
