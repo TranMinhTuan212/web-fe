@@ -19,12 +19,12 @@ function DefaultLayout({ children }) {
     setWidth((width) => !width);
   }
 
-  // useEffect(()=>{
-  //   const user = JSON.parse(localStorage.getItem(userKey))
-  //   if(!user){
-  //     navigate(pages.login)
-  //   }
-  // }, [])
+  useEffect(()=>{
+    const user = JSON.parse(localStorage.getItem(userKey))
+    if(!user){
+      navigate(pages.login)
+    }
+  }, [])
 
   return (
     <div className={cx("wapper")}>
