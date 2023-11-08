@@ -17,7 +17,7 @@ function Input({
   small = false,
   large = false,
   medium = false,
-  area,
+  area = false,
   className = false,
   left = false,
   right = false,
@@ -43,42 +43,81 @@ function Input({
     Tag = "textArea";
   }
 
-  return (
-    <div
-      className={cx(
-        "wapper",
-        { medium },
-        { small },
-        { large },
-        { area },
-        { className },
-        { left },
-        { right }
-      )}
-    >
-      <span className={className}>{topic}</span>{" "}
-      {required && <span className={cx("text-danger", "fs-4")}>*</span>} <br />
-      <Tag
-        placeHolder={placeHolder}
-        disabled={disabled}
-        onBlur={(e) => {
-          handleValidate(e);
-        }}
-        value={state}
-        className={cx("my-input", { area }, { disabled })}
-        onChange={(e) => handleValidate(e)}
-        type={type}
-        name="text"
-      />{" "}
-      <br />
-      <span ref={setRef} className={cx("message")}></span>
-      {search && (
-        <div className={cx("icon")}>
-          <FontAwesomeIcon icon={faSearch} />
-        </div>
-      )}
-    </div>
-  );
+  if(!area){
+    return (
+      <div
+        className={cx(
+          "wapper",
+          { medium },
+          { small },
+          { large },
+          { area },
+          { className },
+          { left },
+          { right }
+        )}
+      >
+        <span className={className}>{topic}</span>{" "}
+        {required && <span className={cx("text-danger", "fs-4")}>*</span>} <br />
+        <Tag
+          placeHolder={placeHolder}
+          disabled={disabled}
+          onBlur={(e) => {
+            handleValidate(e);
+          }}
+          value={state}
+          className={cx("my-input", { area }, { disabled })}
+          onChange={(e) => handleValidate(e)}
+          type={type}
+          name="text"
+        />{" "}
+        <br />
+        <span ref={setRef} className={cx("message")}></span>
+        {search && (
+          <div className={cx("icon")}>
+            <FontAwesomeIcon icon={faSearch} />
+          </div>
+        )}
+      </div>
+    )
+  }else{
+    return (
+      <div
+        className={cx(
+          "wapper",
+          { medium },
+          { small },
+          { large },
+          { area },
+          { className },
+          { left },
+          { right }
+        )}
+      >
+        <span className={className}>{topic}</span>{" "}
+        {required && <span className={cx("text-danger", "fs-4")}>*</span>} <br />
+        <Tag
+          placeHolder={placeHolder}
+          disabled={disabled}
+          onBlur={(e) => {
+            handleValidate(e);
+          }}
+          value={state}
+          className={cx("my-input", { area }, { disabled })}
+          onChange={(e) => handleValidate(e)}
+          type={type}
+          name="text"
+        >{state}</Tag>
+        <br />
+        <span ref={setRef} className={cx("message")}></span>
+        {search && (
+          <div className={cx("icon")}>
+            <FontAwesomeIcon icon={faSearch} />
+          </div>
+        )}
+      </div>
+    )
+  }
 }
 
 export default Input;

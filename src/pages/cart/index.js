@@ -135,7 +135,7 @@ function Cart() {
         </div>
         <div className={cx("item")}>
           <div className={cx("checkbox")}>
-            <input className={cx("check")} type="checkbox" />
+            <input className={cx("check")} type="checkbox"/>
           </div>
           <div className={cx("product")}>
             <ProductRow />

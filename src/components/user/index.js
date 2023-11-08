@@ -2,10 +2,12 @@ import classNames from "classnames/bind";
 import styles from "./user.module.scss";
 import { Link } from "react-router-dom";
 import { pages } from "~/config";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const cx = classNames.bind(styles);
 
-function User({ topic = false }) {
+function User({ topic = false, user = {}, callBack = ()=>{} }) {
   if (topic) {
     return (
       <div className={cx("topic")}>
@@ -17,7 +19,7 @@ function User({ topic = false }) {
         <div className={cx("text", "origin")}>Email</div>
         <div className={cx("text", "unit")}>Số ĐT</div>
         <div className={cx("text", "quantity")}>Đơn hàng</div>
-        <div className={cx("text", "discount")}>Hạng</div>
+        <div className={cx("text", "discount")}>Xóa</div>
       </div>
     );
   } else {
@@ -27,15 +29,16 @@ function User({ topic = false }) {
           <img
             className={cx("image")}
             src={process.env.PUBLIC_URL + "/images/phong.jpg"}
+            // src={`${apiLink}/imageMedias/` + user.photo}
             alt="thỏ"
           />
         </div>
-        <div className={cx("text", "name")}>KH001</div>
-        <div className={cx("text", "price")}>Võ Văn Duy</div>
-        <div className={cx("text", "origin")}>duypro@gmail.com</div>
-        <div className={cx("text", "unit")}>0987654121</div>
+        <div className={cx("text", "name")}>{user.code}</div>
+        <div className={cx("text", "price")}>{user.name}</div>
+        <div className={cx("text", "origin")}>{user.email}</div>
+        <div className={cx("text", "unit")}>{user.phone}</div>
         <div className={cx("text", "quantity")}>100</div>
-        <div className={cx("text", "discount")}>VIP</div>
+        <div onClick={()=>callBack(user._id)} className={cx("text", "discount", "remove")}><FontAwesomeIcon icon={faTrashCan} /></div>
       </Link>
     );
   }

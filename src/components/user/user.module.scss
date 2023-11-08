@@ -55,5 +55,18 @@
 }
 
 .discount{
-    width: 10%;
+    font-size: 2rem;
+    width: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove{
+    color: var(--danger-color);
+    cursor: pointer;
+
+    &:hover{
+        opacity: .8;
+    }
 }

@@ -43,10 +43,28 @@ function Profile() {
   const detailRef = useRef();
   const uploadRef = useRef();
 
-  // const user = JSON.parse(localStorage.getItem(userKey))
-  //   const headers = {
-  //     Authorization: 'Bearer '+ user.accsess_token
-  //   }
+  useEffect(()=>{
+    const user = JSON.parse(localStorage.getItem(userKey))
+    const headers = {
+      Authorization: 'Bearer '+ user.accsess_token
+    }
+    dispatch(setLoading(true));
+    axios.get(`${apiLink}user/me-profile`, { headers })
+    .then(res => {
+      setEmail(res.data.data.email)
+      setName(res.data.data.name)
+      setCode(res.data.data.code)
+      setPhone(res.data.data.phone)
+      setProvince(res.data.data.address?.province)
+      setDistrict(res.data.data.address?.district)
+      setAward(res.data.data.address?.award)
+      setDetail(res.data.data.address?.detail)
+    })
+    .catch(e=>{
+      dispatch(setPopup({ type: false, text: e.response.data?.message }));
+    })
+    dispatch(setLoading(false));
+  }, [])
 
   function handleUpload() {
     const file = uploadRef.current.files[0];
@@ -108,18 +126,35 @@ function Profile() {
     }
 
     // setDisabled(true)
-    // const data = {
-    //   email,
-    //   code,
-    //   name,
-    //   phone,
-    //   province,
-    //   district,
-    //   award,
-    //   detail,
-    //   avatar
-    // }
-    // console.log(data)
+    if(flag){
+      const data = {
+        email,
+        code,
+        name,
+        phone,
+        province,
+        district,
+        award,
+        detail,
+        avatar
+      }
+
+      const user = JSON.parse(localStorage.getItem(userKey))
+    const headers = {
+      Authorization: 'Bearer '+ user.accsess_token
+    }
+    dispatch(setLoading(true));
+    axios.patch(`${apiLink}user/updateMe`, data, { headers })
+    .then(res => {console.log(res.data.data)
+      dispatch(setPopup({ type: true, text: res.data?.message }));
+      setDisabled(true)
+    })
+    .catch(e=>{
+      dispatch(setPopup({ type: false, text: e.response.data?.messages }));
+    })
+    dispatch(setLoading(false));
+      
+    }
   }
 
   // useEffect(()=>{
