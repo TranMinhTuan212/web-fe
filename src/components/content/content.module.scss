@@ -1,7 +1,7 @@
 .wapper{
     width: 100%;
     padding: 0 4rem;
-    // height: 100vh;
+    height: 100vh;
 }
 
 .header{
@@ -9,7 +9,7 @@
 }
 
 .content{
-    min-height: 90vh;
+    height: 90vh;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
 }

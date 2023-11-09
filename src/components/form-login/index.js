@@ -88,11 +88,11 @@ function FormLogin() {
         medium
       />
       <div className={cx("option", "mb-5")}>
-        <div>
+        {/* <div>
           <Link className={cx("item")} to="/forest-password">
             Quên mật khẩu
           </Link>
-        </div>
+        </div> */}
         <div>
           <Link className={cx("item")} to="/register">
             Đăng ký
