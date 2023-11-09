@@ -6,12 +6,12 @@
 .side-bar {
   transition: width 0.2s ease-in-out;
   background-color: var(--background-004);
-  height: 100vh;
+  // height: 100vh;
 }
 
 .content {
   transition: width 0.3s ease;
-  height: 100vh;
+  // height: 100vh;
   flex: 1;
   overflow: hidden;
   overflow-y: scroll;

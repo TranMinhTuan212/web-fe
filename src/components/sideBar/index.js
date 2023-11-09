@@ -5,10 +5,14 @@ import { faAngleLeft, faAngleRight, faAtom, faBell, faCartShopping, faCirclePlus
 import Menu from "../menu";
 import { faShopify } from "@fortawesome/free-brands-svg-icons";
 import { pages } from "~/config";
+import { userKey } from "~/key";
+import { ERole } from "~/enum";
 
 const cx = classNames.bind(styles);
 
 function SideBar({width, onWidth}) {
+
+  const user = JSON.parse(localStorage.getItem(userKey))
 
   return (
     <div className={cx("wapper")}>
@@ -33,14 +37,34 @@ function SideBar({width, onWidth}) {
 
       <div className={cx("list-menu")}>
           <Menu to={pages.home} icon={faAtom} width={width} name="Trang Chủ"/>
-          <Menu to={pages.shop} icon={faShopify} width={width} name="Mua Sắm"/>
+          { 
+            user.role === ERole.customer
+          &&
+          <Menu to={pages.shop} icon={faShopify} width={width} name="Mua Sắm"/> 
+          }
           <Menu to={pages.order} icon={faCartShopping} width={width} name="Đơn Hàng"/>
-          <Menu to={pages.product} icon={faListCheck} width={width} name="Sản Phẩm"/>
-          <Menu to={pages.addProduct} icon={faCirclePlus} width={width} name="Thêm Sản Phẩm"/>
+          {
+            user.role === ERole.admin &&
+            <Menu to={pages.product} icon={faListCheck} width={width} name="Sản Phẩm"/>
+          }
+          {
+            user.role === ERole.admin &&
+            <Menu to={pages.addProduct} icon={faCirclePlus} width={width} name="Thêm Sản Phẩm"/>
+          }
+          { 
+            user.role === ERole.customer
+          &&
+            <Menu to={pages.cart} icon={faCartShopping} width={width} name="Giỏ Hàng"/>
+          }
+          {
+            user.role === ERole.admin &&
+            <Menu to={pages.user} icon={faUser} width={width} name="Người Dùng"/>
+          }
+          
           <Menu to={pages.profile} icon={faUser} width={width} name="Cá Nhân"/>
-          <Menu to={pages.cart} icon={faCartShopping} width={width} name="Giỏ Hàng"/>
+          
           <Menu to={pages.password} icon={faKey} width={width} name="Đổi Mật khẩu"/>
-          <Menu to={pages.user} icon={faUser} width={width} name="Người Dùng"/>
+          
           <Menu to={pages.announce} icon={faBell} width={width} name="Thông Báo"/>
       </div>
     </div>

@@ -18,6 +18,7 @@ import { setLogin } from "~/provider/action";
 import { userKey } from "~/key";
 import { useNavigate } from "react-router-dom";
 import { pages } from "~/config";
+import { ERole } from "~/enum";
 
 const cx = classNames.bind(styles);
 
@@ -30,6 +31,8 @@ function Header() {
     dispatch(setLogin(null));
     navigate(pages.login);
   }
+
+  const user = JSON.parse(localStorage.getItem(userKey))
 
   return (
     <div className={cx("wrapper")}>
@@ -52,13 +55,16 @@ function Header() {
          className={cx("cart")}>
           <FontAwesomeIcon icon={faBell} />
         </div>
-        <div 
+        {
+          user?.role === ERole.customer &&
+          <div 
          onClick={()=>navigate(pages.cart)}
          className={cx("cart")}>
           <FontAwesomeIcon icon={faCartShopping} />
         </div>
+        }
         <div className={cx("logout")}>
-          <Button onSubmit={() => handleLogout()} text="Đăng Xuất" />
+          <Button onSubmit={() => handleLogout()} text="Đăng Xuất"/>
         </div>
         <div className={cx("user")}>
           <div className={cx("user-avatar")}>
