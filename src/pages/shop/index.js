@@ -2,56 +2,45 @@ import classNames from "classnames/bind";
 import styles from "./shop.module.scss";
 import Product from "~/components/product";
 import ReactModal from "react-modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "~/components/button";
 import Input from "~/components/input";
+import axios from "axios";
+import { apiLink } from "~/key";
+import { useGlobalState } from "~/provider/useGlobalState";
+import { setLoading, setPopup } from "~/provider/action";
 
 const cx = classNames.bind(styles);
 
 function Shop() {
   const [modal, setModal] = useState(false);
+  const [data, setData] = useState([])
+  const [keyWord, setKey] = useState('')
+  const [state, dispatch] = useGlobalState()
+
+  useEffect(()=>{
+      dispatch(setLoading(true));
+      axios
+        .post(`${apiLink}product/search`, { keyWord })
+        .then((res) => {
+          if (res.data.data) {
+            setData(res.data.data);
+          }
+        })
+        .catch((e) => {console.log(e)
+          dispatch(setPopup({ type: false, text: e.response.data?.message }));
+        });
+    dispatch(setLoading(false));
+  }, [keyWord])
 
   return (
     <div className={cx("wapper")}>
       <div className={cx("product")}>
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
-        <Product onClick={() => setModal(true)} />
+        {
+          data && data.map((item) => (
+            <Product product={item} onClick={() => setModal(true)} />
+          ))
+        }
       </div>
       <ReactModal isOpen={modal} className={cx("modal")}>
         <div className="">

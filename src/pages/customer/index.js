@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useGlobalState } from "~/provider/useGlobalState";
 import { setLoading, setPopup } from "~/provider/action";
 import axios from "axios";
-import { apiLink } from "~/key";
+import { apiLink, userKey } from "~/key";
 
 const cx = classNames.bind(styles);
 
@@ -16,6 +16,10 @@ function Customer() {
   const [key, setKey] = useState("");
 
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem(userKey))
+    const headers = {
+      Authorization: 'Bearer '+ user.accsess_token
+    }
     dispatch(setLoading(true));
     if (key) {
       const data = {
@@ -33,7 +37,7 @@ function Customer() {
         });
     } else {
       axios
-        .get(`${apiLink}user/allmetable-profile`)
+        .get(`${apiLink}user/allmetable-profile`, { headers })
         .then((res) => {
           setData(res.data.data);
         })

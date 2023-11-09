@@ -4,7 +4,7 @@ import Input from "~/components/input";
 import Button from "~/components/button";
 import Select from "react-dropdown-select";
 import { useGlobalState } from "~/provider/useGlobalState";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { setLoading, setPopup } from "~/provider/action";
@@ -48,6 +48,29 @@ function ProductDetail() {
 
   const uploadRef = useRef();
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const _id = searchParams.get("id")
+
+  useEffect(()=>{
+    dispatch(setLoading(true));
+      axios
+        .post(`${apiLink}product/detail`, { _id })
+        .then((res) => {console.log(res)
+          if (res.data.data) {
+            const product = res.data.data.product
+            console.log(product)
+            setName(product.name)
+            setBarcode(product.code)
+            setPrice(product.price)
+            setUnit('Thùng')
+          }
+        })
+        .catch((e) => {console.log(e)
+          dispatch(setPopup({ type: false, text: e.response.data?.message }));
+        });
+    dispatch(setLoading(false));
+  }, [])
+  
   function handleUpload() {
     const file = uploadRef.current.files[0];
     const reader = new FileReader();

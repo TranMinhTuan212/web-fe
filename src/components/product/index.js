@@ -8,7 +8,7 @@ import { pages } from "~/config";
 
 const cx = classNames.bind(styles);
 
-function Product({ onClick = () => {} }) {
+function Product({ onClick = () => {}, product = {} }) {
   return (
     <Link to={pages.productDetail} className={cx("wapper")}>
       <div className={cx("image")}>
@@ -19,8 +19,8 @@ function Product({ onClick = () => {} }) {
         />
       </div>
       <div className={cx("content")}>
-        <div className={cx("name")}>Thỏ con cute</div>
-        <div className={cx("price")}>100.000đ</div>
+        <div className={cx("name")}>{product.name}</div>
+        <div className={cx("price")}>{product.price}$</div>
         <div className={cx("star")}>
           <FontAwesomeIcon icon={faStar} />
           <FontAwesomeIcon icon={faStar} />

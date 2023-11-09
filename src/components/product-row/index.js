@@ -5,7 +5,7 @@ import { pages } from "~/config";
 
 const cx = classNames.bind(styles)
 
-function ProductRow({ topic = false }) {
+function ProductRow({ topic = false, product = {} }) {
     if(topic){
         return ( 
             <div className={cx('topic')}>
@@ -17,21 +17,21 @@ function ProductRow({ topic = false }) {
                 <div className={cx('text','origin')}>Xuất xứ</div>
                 <div className={cx('text','unit')}>Đơn vị</div>
                 <div className={cx('text','quantity')}>Số lượng</div>
-                <div className={cx('text','discount')}>Chiết khẩu</div>
+                <div className={cx('text','discount')}>Đã bán</div>
             </div>
          );
     }else{
         return ( 
-            <Link to={pages.productDetail} className={cx('wapper')}>
+            <Link to={`${pages.productDetail}?id=${product._id}`} className={cx('wapper')}>
                 <div className={cx('photo')}>
                     <img className={cx('image')} src={process.env.PUBLIC_URL + '/images/tho.jpg'} alt="thỏ"/>
                 </div>
-                <div className={cx('text','name')}>Thỏ Con Cute</div>
-                <div className={cx('text','price')}>100.000$</div>
-                <div className={cx('text','origin')}>Trung Quốc</div>
-                <div className={cx('text','unit')}>Thùng</div>
-                <div className={cx('text','quantity')}>100</div>
-                <div className={cx('text','discount')}>8%</div>
+                <div className={cx('text','name')}>{product.name}</div>
+                <div className={cx('text','price')}>{product.price}</div>
+                <div className={cx('text','origin')}>{'Trung Quốc'}</div>
+                <div className={cx('text','unit')}>{'Thùng'}</div>
+                <div className={cx('text','quantity')}>{product.quantity}</div>
+                <div className={cx('text','discount')}>{product.sold_count}</div>
             </Link>
          );
     }
