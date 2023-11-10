@@ -5,13 +5,17 @@ import Content from "~/components/content";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { userKey } from "~/key";
+import { apiLink, userKey } from "~/key";
 import { pages } from "~/config";
+import { useGlobalState } from "~/provider/useGlobalState";
+import { setLoading, setPopup } from "~/provider/action";
+import axios from "axios";
 
 const cx = classNames.bind(styles);
 
 function DefaultLayout({ children }) {
   const navigate = useNavigate();
+  const [state, dispatch] = useGlobalState()
 
   const [max, setWidth] = useState(true);
 
@@ -21,9 +25,18 @@ function DefaultLayout({ children }) {
 
   useEffect(()=>{
     const user = JSON.parse(localStorage.getItem(userKey))
-    if(!user){
-      navigate(pages.login)
+    const headers = {
+      Authorization: 'Bearer '+ user.accsess_token
     }
+    console.log(headers)
+    dispatch(setLoading(true))
+    axios.post(`${apiLink}user/check-token`,{}, { headers })
+    .then(()=>{})
+    .catch((e)=>{
+      dispatch(setPopup({ type: false, text: 'Phiên đăng nhập đã hết hạn vui lòng đăng nhập lại !' }));
+      navigate(pages.login)
+    })
+    dispatch(setLoading(false))
   }, [])
 
   return (

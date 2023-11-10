@@ -85,7 +85,7 @@ function AddProduct() {
     })
     .catch((res)=>{
       dispatch(setLoading(false))
-      dispatch(setPopup({ type: false, text: res.response.data?.message }))
+      dispatch(setPopup({ type: false, text: 'Có lỗi thử lại sau' }))
     })
   }, [])
 
@@ -154,12 +154,11 @@ function AddProduct() {
         .post(`${apiLink}product/create`, data, { headers })
         .then((res) => {
           dispatch(setPopup({ type: true, text: res.data?.message }))
-          console.log(res.data.message)
           resetInput();
         })
         .catch((res)=>{
           dispatch(setLoading(false))
-          dispatch(setPopup({ type: false, text: res.data?.message }))
+          dispatch(setPopup({ type: false, text: 'Có lỗi thử lại sau' }))
         })
         dispatch(setLoading(false))
     }

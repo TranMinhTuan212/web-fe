@@ -62,7 +62,7 @@ function Profile() {
       setDetail(res.data.data.address?.detail)
     })
     .catch(e=>{
-      dispatch(setPopup({ type: false, text: e.response.data?.message }));
+      dispatch(setPopup({ type: false, text: 'Có lỗi thử lại sau' }));
     })
     dispatch(setLoading(false));
   }, [])

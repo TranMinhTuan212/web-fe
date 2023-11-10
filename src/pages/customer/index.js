@@ -33,7 +33,7 @@ function Customer() {
           }
         })
         .catch((e) => {
-          dispatch(setPopup({ type: false, text: e.response.data?.message }));
+          dispatch(setPopup({ type: false, text: 'Có lỗi thử lại sau' }));
         });
     } else {
       axios
@@ -42,7 +42,7 @@ function Customer() {
           setData(res.data.data);
         })
         .catch((e) => {
-          dispatch(setPopup({ type: false, text: e.response.data?.message }));
+          dispatch(setPopup({ type: false, text: 'Có lỗi thử lại sau' }));
         });
     }
     dispatch(setLoading(false));
@@ -66,7 +66,7 @@ function Customer() {
           });
       })
       .catch((e) => {
-        dispatch(setPopup({ type: false, text: e.response.data?.message }));
+        dispatch(setPopup({ type: false, text: 'Có lỗi thử lại sau' }));
       });
     dispatch(setLoading(false));
   }
