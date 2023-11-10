@@ -22,7 +22,7 @@ function ProductRow({ topic = false, product = {} }) {
          );
     }else{
         return ( 
-            <Link to={`${pages.productDetail}?id=${product._id}`} className={cx('wapper')}>
+            <Link to={`${pages.productDetail}?id=${product._id}&pageType=view`} className={cx('wapper')}>
                 <div className={cx('photo')}>
                     <img className={cx('image')} src={process.env.PUBLIC_URL + '/images/tho.jpg'} alt="thỏ"/>
                 </div>

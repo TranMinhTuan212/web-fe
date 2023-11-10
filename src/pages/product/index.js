@@ -6,7 +6,7 @@ import { useGlobalState } from "~/provider/useGlobalState";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
-import { apiLink } from "~/key";
+import { apiLink, userKey } from "~/key";
 import { setLoading, setPopup } from "~/provider/action";
 
 const cx = classNames.bind(styles);
@@ -18,11 +18,12 @@ function Product() {
   const [keyWord, setKey] = useState('')
 
   useEffect(()=>{
-      const data = {
-        name: keyWord,
+      const user = JSON.parse(localStorage.getItem(userKey))
+      const headers = {
+        Authorization: `Bearer ${user.accessToken}`,
       };
       axios
-        .post(`${apiLink}product/search`, { keyWord })
+        .post(`${apiLink}product/search`, { keyWord }, { headers })
         .then((res) => {console.log(res)
           if (res.data.data) {
             setData(res.data.data);

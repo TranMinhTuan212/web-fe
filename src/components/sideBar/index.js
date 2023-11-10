@@ -38,26 +38,26 @@ function SideBar({width, onWidth}) {
       <div className={cx("list-menu")}>
           <Menu to={pages.home} icon={faAtom} width={width} name="Trang Chủ"/>
           { 
-            user.role === ERole.customer
+            user?.role === ERole.customer
           &&
           <Menu to={pages.shop} icon={faShopify} width={width} name="Mua Sắm"/> 
           }
           <Menu to={pages.order} icon={faCartShopping} width={width} name="Đơn Hàng"/>
           {
-            user.role === ERole.admin &&
+            user?.role === ERole.admin &&
             <Menu to={pages.product} icon={faListCheck} width={width} name="Sản Phẩm"/>
           }
           {
-            user.role === ERole.admin &&
+            user?.role === ERole.admin &&
             <Menu to={pages.addProduct} icon={faCirclePlus} width={width} name="Thêm Sản Phẩm"/>
           }
           { 
-            user.role === ERole.customer
+            user?.role === ERole.customer
           &&
             <Menu to={pages.cart} icon={faCartShopping} width={width} name="Giỏ Hàng"/>
           }
           {
-            user.role === ERole.admin &&
+            user?.role === ERole.admin &&
             <Menu to={pages.user} icon={faUser} width={width} name="Người Dùng"/>
           }
           

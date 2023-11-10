@@ -50,6 +50,7 @@ function Profile() {
     }
     dispatch(setLoading(true));
     axios.get(`${apiLink}user/me-profile`, { headers })
+    // axios.get(`http://192.168.1.44:8000/user/me-profile`, { headers })
     .then(res => {
       setEmail(res.data.data.email)
       setName(res.data.data.name)

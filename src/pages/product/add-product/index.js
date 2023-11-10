@@ -44,14 +44,14 @@ function AddProduct() {
   const [unit, setUnit] = useState("");
   const [image, setImage] = useState("");
 
-  const [selectImage, setSelectImage] = useState();
-  const [category, setCategories] = useState("");
+  const [selectImage, setSelectImage] = useState('');
+  // const [category, setCategories] = useState("");
 
   const [categoryList, setCategoryList] = useState([]);
 
   const [photoMessage, setPhotoMessage] = useState("");
 
-  const [categotyId, setCategoryId] = useState("");
+  const [category_id, setCategoryId] = useState("");
 
   const uploadRef = useRef();
 
@@ -69,22 +69,25 @@ function AddProduct() {
     setPhotoMessage("");
   }
 
-  // useEffect(()=>{
-  //   dispatch(setLoading(true))
-  //   axios.get(`${apiLink}category/all`)
-  //   .then((res)=>{
-  //     const list = []
-  //     res.data?.data.forEach(element => {
-  //       list.push({ value: element._id, label: element.name })
-  //     });
-  //     setCategoryList(list)
-  //     dispatch(setLoading(false))
-  //   })
-  //   .catch((res)=>{
-  //     dispatch(setLoading(false))
-  //     dispatch(setPopup({ type: false, text: res.response.data?.message }))
-  //   })
-  // }, [])
+  useEffect(()=>{
+    dispatch(setLoading(true))
+    axios.get(`${apiLink}category/all`)
+    .then((res)=>{
+      const list = []
+      res.data?.data.forEach(element => {
+        list.push({ value: element._id, label: element.name })
+      });
+      setCategoryList(list)
+      if(list.length > 0){
+        setCategoryId(list[0].value)
+      }
+      dispatch(setLoading(false))
+    })
+    .catch((res)=>{
+      dispatch(setLoading(false))
+      dispatch(setPopup({ type: false, text: res.response.data?.message }))
+    })
+  }, [])
 
   function handleSubmit() {
     let flag = true;
@@ -128,50 +131,51 @@ function AddProduct() {
     if (flag) {
       const data = {
         name,
-        barcode,
-        price,
+        code : barcode,
+        price: +price,
         description,
-        discount,
-        categotyId,
+        discount: +discount,
+        category_id,
         image,
         origin,
         unit,
       };
-      // dispatch(setLoading(true));
-      console.log(data);
-      // const user = JSON.parse(localStorage.getItem(userKey))
+      dispatch(setLoading(true));
+      const user = JSON.parse(localStorage.getItem(userKey))
 
-      // if (!user) {
-      //   return navigate(pages.login);
-      // }
-      // const headers = {
-      //   Authorization: `Bearer ${user.accessToken}`,
-      // };
-      // dispatch(setLoading(true))
-      // axios
-      //   .post(`${apiLink}product/create-product`, formData, { headers })
-      //   .then((res) => {
-      //     dispatch(setPopup({ type: true, text: res.data.data?.message }))
-      //     dispatch(setLoading(false))
-      //     resetInput();
-      //   })
-      //   .then(() => dispatch(setLoading(false)))
-      //   .catch((res)=>{
-      //     dispatch(setLoading(false))
-      //     dispatch(setPopup({ type: false, text: res.data.data?.message }))
-      //   })
+      if (!user) {
+        return navigate(pages.login);
+      }
+      const headers = {
+        Authorization: `Bearer ${user.accessToken}`,
+      };
+      dispatch(setLoading(true))
+      axios
+        .post(`${apiLink}product/create`, data, { headers })
+        .then((res) => {
+          dispatch(setPopup({ type: true, text: res.data?.message }))
+          console.log(res.data.message)
+          resetInput();
+        })
+        .catch((res)=>{
+          dispatch(setLoading(false))
+          dispatch(setPopup({ type: false, text: res.data?.message }))
+        })
+        dispatch(setLoading(false))
     }
   }
 
-  // function resetInput() {
-  //   setName("");
-  //   setPrice("");
-  //   setDescription("");
-  //   setDiscount("");
-  //   setCategoryId("");
-  //   setSelectImage("");
-  //   resetCategoryRef.current.selectedIndex = 0;
-  // }
+  function resetInput() {
+    setName("");
+    setBarcode("");
+    setOrigin("")
+    setUnit("")
+    setPrice("");
+    setDescription("");
+    setDiscount("");
+    setCategoryId("");
+    setSelectImage(null);
+  }
 
   return (
     <div className={cx("wapper")}>
@@ -267,7 +271,7 @@ function AddProduct() {
           />
           <Select
             onChange={(e) => {
-              setCategories(e[0]?.value);
+              setCategoryId(e[0]?.value);
             }}
             value={categoryList[0]}
             data={categoryList}

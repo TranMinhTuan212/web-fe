@@ -60,7 +60,7 @@ function Input({
         <span className={className}>{topic}</span>{" "}
         {required && <span className={cx("text-danger", "fs-4")}>*</span>} <br />
         <Tag
-          placeHolder={placeHolder}
+          placeholder={placeHolder}
           disabled={disabled}
           onBlur={(e) => {
             handleValidate(e);
@@ -97,12 +97,11 @@ function Input({
         <span className={className}>{topic}</span>{" "}
         {required && <span className={cx("text-danger", "fs-4")}>*</span>} <br />
         <Tag
-          placeHolder={placeHolder}
+          placeholder={placeHolder}
           disabled={disabled}
           onBlur={(e) => {
             handleValidate(e);
           }}
-          value={state}
           className={cx("my-input", { area }, { disabled })}
           onChange={(e) => handleValidate(e)}
           type={type}
