@@ -25,7 +25,7 @@ function Product() {
       };
       axios
         .post(`${apiLink}product/search`, { keyWord }, { headers })
-        .then((res) => {
+        .then((res) => {console.log(res.data.data)
           if (res.data.data) {
             setData(res.data.data);
           }

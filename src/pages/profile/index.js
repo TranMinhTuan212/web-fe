@@ -63,11 +63,14 @@ function Profile() {
       setDistrict(res.data.data.address?.district)
       setAward(res.data.data.address?.award)
       setDetail(res.data.data.address?.detail)
+      dispatch(setLoading(false));
     })
     .catch(e=>{
       dispatch(setPopup({ type: false, text: 'Có lỗi thử lại sau' }));
+      dispatch(setLoading(false));
     })
     }else{
+      dispatch(setLoading(true));
       axios.post(`${apiLink}user/admin-MeProfile`,{ user_id: id }, { headers })
     .then(res => {
       setEmail(res.data.data.email)
@@ -81,9 +84,9 @@ function Profile() {
     })
     .catch(e=>{
       dispatch(setPopup({ type: false, text: 'Có lỗi thử lại sau' }));
+      dispatch(setLoading(false));
     })
     }
-    dispatch(setLoading(false));
   }, [])
 
   function handleUpload() {

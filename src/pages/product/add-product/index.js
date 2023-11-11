@@ -41,7 +41,7 @@ function AddProduct() {
   const [unit, setUnit] = useState("");
   const [image, setImage] = useState("");
 
-  const [selectImage, setSelectImage] = useState('');
+  const [selectImage, setSelectImage] = useState();
 
   const [categoryList, setCategoryList] = useState([]);
 
