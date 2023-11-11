@@ -165,14 +165,15 @@ function Profile() {
     }
     dispatch(setLoading(true));
     axios.patch(`${apiLink}user/updateMe`, formData, { headers })
-    .then(res => {console.log(res.data.data)
+    .then(res => {
       dispatch(setPopup({ type: true, text: res.data?.message }));
       setDisabled(true)
+      dispatch(setLoading(false));
     })
-    .catch(res=>{console.log(res)
+    .catch(res=>{
       dispatch(setPopup({ type: false, text: res.response?.data?.message }));
+      dispatch(setLoading(false));
     })
-    dispatch(setLoading(false));
       
     }
   }

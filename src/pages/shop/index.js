@@ -30,11 +30,12 @@ function Shop() {
           if (res.data.data) {
             setData(res.data.data);
           }
+          dispatch(setLoading(false));
         })
         .catch((e) => {
           dispatch(setPopup({ type: false, text: e.response.data?.message }));
+          dispatch(setLoading(false));
         });
-    dispatch(setLoading(false));
   }, [keyWord])
 
   return (

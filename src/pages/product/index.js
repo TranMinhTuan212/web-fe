@@ -29,11 +29,12 @@ function Product() {
           if (res.data.data) {
             setData(res.data.data);
           }
+          dispatch(setLoading(false));
         })
         .catch((e) => {
+          dispatch(setLoading(false));
           dispatch(setPopup({ type: false, text: 'Có lỗi thử lại sau' }));
         });
-    dispatch(setLoading(false));
   }, [keyWord])
 
   return (

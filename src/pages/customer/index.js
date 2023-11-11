@@ -31,21 +31,24 @@ function Customer() {
           if (res.data.data) {
             setData(res.data.data);
           }
+          dispatch(setLoading(false));
         })
         .catch((e) => {
           dispatch(setPopup({ type: false, text: 'Có lỗi thử lại sau' }));
+          dispatch(setLoading(false));
         });
     } else {
       axios
         .get(`${apiLink}user/allmetable-profile`, { headers })
         .then((res) => {
           setData(res.data.data);
+          dispatch(setLoading(false));
         })
         .catch((e) => {
           dispatch(setPopup({ type: false, text: 'Có lỗi thử lại sau' }));
+          dispatch(setLoading(false));
         });
     }
-    dispatch(setLoading(false));
   }, [key]);
 
   function onDelete(e) {console.log(e)

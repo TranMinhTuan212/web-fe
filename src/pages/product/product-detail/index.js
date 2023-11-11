@@ -43,37 +43,38 @@ function ProductDetail() {
   const [photoMessage, setPhotoMessage] = useState("");
 
   const [categotyId, setCategoryId] = useState("");
-  const [disable, setDisabled] = useState(true)
+  const [disable, setDisabled] = useState(true);
 
   const uploadRef = useRef();
-  const user = JSON.parse(localStorage.getItem(userKey))
+  const user = JSON.parse(localStorage.getItem(userKey));
 
-  const [searchParams, ] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const _id = searchParams.get("id");
   const pageType = searchParams.get("pageType");
 
-  useEffect(()=>{
-      const headers = {
-        Authorization: `Bearer ${user.accessToken}`,
-      };
-    dispatch(setLoading(true))
-    axios.get(`${apiLink}category/all`, { headers })
-    .then((res)=>{
-      const list = []
-      res.data?.data.forEach(element => {
-        list.push({ value: element._id, label: element.name })
+  useEffect(() => {
+    const headers = {
+      Authorization: `Bearer ${user.accessToken}`,
+    };
+    dispatch(setLoading(true));
+    axios
+      .get(`${apiLink}category/all`, { headers })
+      .then((res) => {
+        const list = [];
+        res.data?.data.forEach((element) => {
+          list.push({ value: element._id, label: element.name });
+        });
+        setCategoryList(list);
+        if (list.length > 0) {
+          setCategoryId(list[0].value);
+        }
+        dispatch(setLoading(false));
+      })
+      .catch((res) => {
+        dispatch(setLoading(false));
+        dispatch(setPopup({ type: false, text: "Có lỗi thử lại sau" }));
       });
-      setCategoryList(list)
-      if(list.length > 0){
-        setCategoryId(list[0].value)
-      }
-      dispatch(setLoading(false))
-    })
-    .catch((res)=>{
-      dispatch(setLoading(false))
-      dispatch(setPopup({ type: false, text: 'Có lỗi thử lại sau' }))
-    })
-  }, [])
+  }, []);
 
   useEffect(() => {
     switch (pageType) {
@@ -90,14 +91,15 @@ function ProductDetail() {
               setPrice(+product.price);
               setUnit(product.unit);
               setOrigin(product.origin);
-              setDescription(product.description)
-              setDiscount(product.discount)
+              setDescription(product.description);
+              setDiscount(product.discount);
             }
+            dispatch(setLoading(false));
           })
           .catch((e) => {
             dispatch(setPopup({ type: false, text: e.response.data?.message }));
+            dispatch(setLoading(false));
           });
-        dispatch(setLoading(false));
         break;
       default:
         break;
@@ -121,7 +123,7 @@ function ProductDetail() {
   function handleSubmit() {
     switch (disable) {
       case true:
-        setDisabled(false)
+        setDisabled(false);
         break;
       case false:
         let flag = true;
@@ -164,7 +166,7 @@ function ProductDetail() {
           setPhotoMessage(fileValidate);
         }
 
-        if(flag){
+        if (flag) {
           const data = {
             _id,
             name,
@@ -178,27 +180,27 @@ function ProductDetail() {
             unit,
           };
           dispatch(setLoading(true));
-      const user = JSON.parse(localStorage.getItem(userKey))
+          const user = JSON.parse(localStorage.getItem(userKey));
 
-      if (!user) {
-        return navigate(pages.login);
-      }
-      const headers = {
-        Authorization: `Bearer ${user.accessToken}`,
-      };
-      dispatch(setLoading(true))
-      axios
-        .put(`${apiLink}product/update`, data, { headers })
-        .then((res) => {
-          dispatch(setPopup({ type: true, text: res.data?.message }))
-          setDisabled(true)
-          resetInput();
-        })
-        .catch((res)=>{
-          dispatch(setLoading(false))
-          dispatch(setPopup({ type: false, text: res.data?.message }))
-        })
-        dispatch(setLoading(false))
+          if (!user) {
+            return navigate(pages.login);
+          }
+          const headers = {
+            Authorization: `Bearer ${user.accessToken}`,
+          };
+          dispatch(setLoading(true));
+          axios
+            .put(`${apiLink}product/update`, data, { headers })
+            .then((res) => {
+              dispatch(setPopup({ type: true, text: res.data?.message }));
+              setDisabled(true);
+              resetInput();
+              dispatch(setLoading(false));
+            })
+            .catch((res) => {
+              dispatch(setLoading(false));
+              dispatch(setPopup({ type: false, text: res.data?.message }));
+            });
         }
         break;
       default:
@@ -209,8 +211,8 @@ function ProductDetail() {
   function resetInput() {
     setName("");
     setBarcode("");
-    setOrigin("")
-    setUnit("")
+    setOrigin("");
+    setUnit("");
     setPrice("");
     setDescription("");
     setDiscount("");
@@ -336,16 +338,15 @@ function ProductDetail() {
             area
           />
         </div>
-        {
-          user.role === ERole.admin &&
+        {user.role === ERole.admin && (
           <div className={cx("button")}>
-          <Button
-            onSubmit={handleSubmit}
-            icon={""}
-            text={disable ? "Sửa" : "Lưu"}
-          />
-        </div>
-        }
+            <Button
+              onSubmit={handleSubmit}
+              icon={""}
+              text={disable ? "Sửa" : "Lưu"}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
