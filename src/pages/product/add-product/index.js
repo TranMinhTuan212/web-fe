@@ -47,7 +47,7 @@ function AddProduct() {
 
   const [photoMessage, setPhotoMessage] = useState("");
 
-  const [category_id, setCategoryId] = useState("");
+  const [categoryId, setCategoryId] = useState("");
 
   const uploadRef = useRef();
 
@@ -131,7 +131,7 @@ function AddProduct() {
         price: +price,
         description,
         discount: +discount,
-        category_id,
+        categoryId,
         image,
         origin,
         unit,

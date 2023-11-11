@@ -6,6 +6,12 @@ import { pages } from "~/config";
 const cx = classNames.bind(styles)
 
 function ProductRow({ topic = false, product = {} }) {
+
+    const formatter = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+      });
+
     if(topic){
         return ( 
             <div className={cx('topic')}>
@@ -27,7 +33,7 @@ function ProductRow({ topic = false, product = {} }) {
                     <img className={cx('image')} src={process.env.PUBLIC_URL + '/images/tho.jpg'} alt="thỏ"/>
                 </div>
                 <div className={cx('text','name')}>{product.name}</div>
-                <div className={cx('text','price')}>{product.price} VNĐ</div>
+                <div className={cx('text','price')}>{formatter.format(product.price)}</div>
                 <div className={cx('text','origin')}>{product.origin}</div>
                 <div className={cx('text','unit')}>{product.unit}</div>
                 <div className={cx('text','quantity')}>{product.discount}%</div>
