@@ -13,23 +13,24 @@ const cx = classNames.bind(styles);
 
 function Product() {
 
-  const [state, dispatch] = useGlobalState()
+  const [, dispatch] = useGlobalState()
   const [data, setData] = useState([])
   const [keyWord, setKey] = useState('')
 
   useEffect(()=>{
+    dispatch(setLoading(true));
       const user = JSON.parse(localStorage.getItem(userKey))
       const headers = {
         Authorization: `Bearer ${user.accessToken}`,
       };
       axios
         .post(`${apiLink}product/search`, { keyWord }, { headers })
-        .then((res) => {console.log(res)
+        .then((res) => {
           if (res.data.data) {
             setData(res.data.data);
           }
         })
-        .catch((e) => {console.log(e)
+        .catch((e) => {
           dispatch(setPopup({ type: false, text: 'Có lỗi thử lại sau' }));
         });
     dispatch(setLoading(false));

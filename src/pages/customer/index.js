@@ -26,7 +26,7 @@ function Customer() {
         name: key,
       };
       axios
-        .post(`${apiLink}user/search-user/`, data)
+        .post(`${apiLink}user/search-user/`, data, { headers })
         .then((res) => {
           if (res.data.data) {
             setData(res.data.data);

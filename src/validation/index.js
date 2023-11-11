@@ -30,9 +30,9 @@ function notEmpty(value) {
 }
 
 function isNumber(value) {console.log(typeof value)
-  if (nullOrUndefinedOrEmpty(value)) return message.IS_NUMBER;
-  if (typeof value !== "string") return message.IS_NUMBER;
-  if (isNaN(+value) || isNaN(Number(value))) {
+  const regex = /^-?\d+(\.\d+)?$/
+
+  if (!regex.test(value)) {
     return message.IS_NUMBER;
   }
   return true;

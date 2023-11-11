@@ -16,7 +16,7 @@ function ProductRow({ topic = false, product = {} }) {
                 <div className={cx('text','price')}>Đơn giá</div>
                 <div className={cx('text','origin')}>Xuất xứ</div>
                 <div className={cx('text','unit')}>Đơn vị</div>
-                <div className={cx('text','quantity')}>Số lượng</div>
+                <div className={cx('text','quantity')}>chiết khấu</div>
                 <div className={cx('text','discount')}>Đã bán</div>
             </div>
          );
@@ -30,7 +30,7 @@ function ProductRow({ topic = false, product = {} }) {
                 <div className={cx('text','price')}>{product.price}</div>
                 <div className={cx('text','origin')}>{'Trung Quốc'}</div>
                 <div className={cx('text','unit')}>{'Thùng'}</div>
-                <div className={cx('text','quantity')}>{product.quantity}</div>
+                <div className={cx('text','quantity')}>{product.discount}%</div>
                 <div className={cx('text','discount')}>{product.sold_count}</div>
             </Link>
          );

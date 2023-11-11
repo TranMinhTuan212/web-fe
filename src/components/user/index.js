@@ -24,7 +24,7 @@ function User({ topic = false, user = {}, callBack = ()=>{} }) {
     );
   } else {
     return (
-      <Link to={pages.profile} className={cx("wapper")}>
+      <Link to={`${pages.profile}?id=${user._id}`} className={cx("wapper")}>
         <div className={cx("photo")}>
           <img
             className={cx("image")}

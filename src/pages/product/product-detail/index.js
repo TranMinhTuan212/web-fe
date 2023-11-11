@@ -4,13 +4,14 @@ import Input from "~/components/input";
 import Button from "~/components/button";
 import Select from "react-dropdown-select";
 import { useGlobalState } from "~/provider/useGlobalState";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { setLoading, setPopup } from "~/provider/action";
 import { apiLink, userKey } from "~/key";
 import { isNumber, notEmpty, typeFile, validateForm } from "~/validation";
 import { pages } from "~/config";
+import { ERole } from "~/enum";
 
 const cx = classNames.bind(styles);
 
@@ -26,8 +27,6 @@ function ProductDetail() {
   const originMessageRef = useRef();
   const unitMessageRef = useRef();
 
-  const resetCategoryRef = useRef();
-
   const [name, setName] = useState("");
   const [barcode, setBarcode] = useState("");
   const [price, setPrice] = useState("");
@@ -38,23 +37,22 @@ function ProductDetail() {
   const [image, setImage] = useState("");
 
   const [selectImage, setSelectImage] = useState();
-  const [category, setCategories] = useState("");
 
   const [categoryList, setCategoryList] = useState([]);
 
   const [photoMessage, setPhotoMessage] = useState("");
 
   const [categotyId, setCategoryId] = useState("");
-  const [dissiable, setDisabled] = useState(true)
+  const [disable, setDisabled] = useState(true)
 
   const uploadRef = useRef();
+  const user = JSON.parse(localStorage.getItem(userKey))
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, ] = useSearchParams();
   const _id = searchParams.get("id");
   const pageType = searchParams.get("pageType");
 
   useEffect(()=>{
-    const user = JSON.parse(localStorage.getItem(userKey))
       const headers = {
         Authorization: `Bearer ${user.accessToken}`,
       };
@@ -92,6 +90,8 @@ function ProductDetail() {
               setPrice(+product.price);
               setUnit(product.unit);
               setOrigin(product.origin);
+              setDescription(product.description)
+              setDiscount(product.discount)
             }
           })
           .catch((e) => {
@@ -102,7 +102,7 @@ function ProductDetail() {
       default:
         break;
     }
-  }, []);
+  }, [disable]);
 
   function handleUpload() {
     const file = uploadRef.current.files[0];
@@ -119,7 +119,7 @@ function ProductDetail() {
   }
 
   function handleSubmit() {
-    switch (dissiable) {
+    switch (disable) {
       case true:
         setDisabled(false)
         break;
@@ -229,7 +229,7 @@ function ProductDetail() {
         >
           <img className={cx("photo-demo")} src={selectImage} alt="" />
           <input
-            disabled={dissiable}
+            disabled={disable}
             onChange={handleUpload}
             ref={uploadRef}
             type="file"
@@ -258,7 +258,7 @@ function ProductDetail() {
 
         <div className={cx("inputs")}>
           <Input
-            disabled={dissiable}
+            disabled={disable}
             setRef={nameMessageRef}
             topic={"Tên sản phẩm"}
             state={name}
@@ -267,7 +267,7 @@ function ProductDetail() {
             small
           />
           <Input
-            disabled={dissiable}
+            disabled={disable}
             setRef={barcodeMessageRef}
             topic={"Mã sản phẩm"}
             state={barcode}
@@ -276,7 +276,7 @@ function ProductDetail() {
             small
           />
           <Input
-            disabled={dissiable}
+            disabled={disable}
             type="number"
             setRef={priceMessageRef}
             topic={"Giá sản phẩm"}
@@ -286,7 +286,7 @@ function ProductDetail() {
             small
           />
           <Input
-            disabled={dissiable}
+            disabled={disable}
             type="number"
             setRef={discountMessageRef}
             topic={"Chiết khấu (%)"}
@@ -296,7 +296,7 @@ function ProductDetail() {
             small
           />
           <Input
-            disabled={dissiable}
+            disabled={disable}
             type="text"
             setRef={originMessageRef}
             topic={"Xuất xứ"}
@@ -306,7 +306,7 @@ function ProductDetail() {
             small
           />
           <Input
-            disabled={dissiable}
+            disabled={disable}
             type="text"
             setRef={unitMessageRef}
             topic={"Đơn vị"}
@@ -316,7 +316,7 @@ function ProductDetail() {
             small
           />
           <Select
-            disabled={dissiable}
+            disabled={disable}
             onChange={(e) => {
               setCategoryId(e[0]?.value);
             }}
@@ -326,7 +326,7 @@ function ProductDetail() {
             options={categoryList || []}
           />
           <Input
-            disabled={dissiable}
+            disabled={disable}
             setRef={descriptionMessageRef}
             topic={"Mô tả sản phẩm"}
             state={description}
@@ -336,13 +336,16 @@ function ProductDetail() {
             area
           />
         </div>
-        <div className={cx("button")}>
+        {
+          user.role === ERole.admin &&
+          <div className={cx("button")}>
           <Button
             onSubmit={handleSubmit}
             icon={""}
-            text={dissiable ? "Sửa" : "Lưu"}
+            text={disable ? "Sửa" : "Lưu"}
           />
         </div>
+        }
       </div>
     </div>
   );

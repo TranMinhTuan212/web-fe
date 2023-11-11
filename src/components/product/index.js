@@ -10,7 +10,7 @@ const cx = classNames.bind(styles);
 
 function Product({ onClick = () => {}, product = {} }) {
   return (
-    <Link to={pages.productDetail} className={cx("wapper")}>
+    <Link to={`${pages.productDetail}?id=${product._id}&pageType=view`} className={cx("wapper")}>
       <div className={cx("image")}>
         <img
           className={cx("image-item")}

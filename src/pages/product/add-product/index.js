@@ -9,7 +9,6 @@ import {
   validateForm,
   notEmpty,
   typeFile,
-  isCategory,
 } from "~/validation";
 import axios from "axios";
 import { useGlobalState } from "~/provider/useGlobalState";
@@ -33,8 +32,6 @@ function AddProduct() {
   const originMessageRef = useRef();
   const unitMessageRef = useRef();
 
-  const resetCategoryRef = useRef();
-
   const [name, setName] = useState("");
   const [barcode, setBarcode] = useState("");
   const [price, setPrice] = useState("");
@@ -45,7 +42,6 @@ function AddProduct() {
   const [image, setImage] = useState("");
 
   const [selectImage, setSelectImage] = useState('');
-  // const [category, setCategories] = useState("");
 
   const [categoryList, setCategoryList] = useState([]);
 
