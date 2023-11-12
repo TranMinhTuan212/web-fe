@@ -154,7 +154,7 @@ function AddProduct() {
         })
         .catch((res)=>{
           dispatch(setLoading(false))
-          dispatch(setPopup({ type: false, text: 'Có lỗi thử lại sau' }))
+          dispatch(setPopup({ type: false, text: res.response.data?.message }))
         })
         dispatch(setLoading(false))
     }

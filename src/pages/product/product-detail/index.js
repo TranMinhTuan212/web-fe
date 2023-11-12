@@ -42,7 +42,7 @@ function ProductDetail() {
 
   const [photoMessage, setPhotoMessage] = useState("");
 
-  const [categotyId, setCategoryId] = useState("");
+  const [categoryId, setCategoryId] = useState("");
   const [disable, setDisabled] = useState(true);
 
   const uploadRef = useRef();
@@ -174,7 +174,7 @@ function ProductDetail() {
             price,
             description,
             discount,
-            categotyId,
+            categoryId,
             image,
             origin,
             unit,
