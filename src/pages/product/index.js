@@ -12,45 +12,47 @@ import { setLoading, setPopup } from "~/provider/action";
 const cx = classNames.bind(styles);
 
 function Product() {
+  const [, dispatch] = useGlobalState();
+  const [data, setData] = useState([]);
+  const [keyWord, setKey] = useState("");
 
-  const [, dispatch] = useGlobalState()
-  const [data, setData] = useState([])
-  const [keyWord, setKey] = useState('')
-
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(setLoading(true));
-      const user = JSON.parse(localStorage.getItem(userKey))
-      const headers = {
-        Authorization: `Bearer ${user.accessToken}`,
-      };
-      axios
-        .post(`${apiLink}product/search`, { keyWord }, { headers })
-        .then((res) => {console.log(res.data.data)
-          if (res.data.data) {
-            setData(res.data.data);
-          }
-          dispatch(setLoading(false));
-        })
-        .catch((e) => {
-          dispatch(setLoading(false));
-          dispatch(setPopup({ type: false, text: 'Có lỗi thử lại sau' }));
-        });
-  }, [keyWord])
+    const user = JSON.parse(localStorage.getItem(userKey));
+    const headers = {
+      Authorization: `Bearer ${user.accessToken}`,
+    };
+    axios
+      .post(`${apiLink}product/search`, { keyWord }, { headers })
+      .then((res) => {
+        console.log(res.data.data);
+        if (res.data.data) {
+          setData(res.data.data);
+        }
+        dispatch(setLoading(false));
+      })
+      .catch((e) => {
+        dispatch(setLoading(false));
+        dispatch(setPopup({ type: false, text: "Có lỗi thử lại sau" }));
+      });
+  }, [keyWord]);
 
   return (
     <div className={cx("wapper")}>
       <h1 className={cx("topic")}>Quản lí sản phẩm</h1>
       <div className={cx("navbar")}>
-        <Input state={keyWord} setState={setKey} search placeHolder="Tìm kiếm sản phẩm" small right />
+        <Input
+          state={keyWord}
+          setState={setKey}
+          search
+          placeHolder="Tìm kiếm sản phẩm"
+          small
+          right
+        />
       </div>
-      <ProductRow topic/>
+      <ProductRow topic />
       <div className={cx("list")}>
-        {
-          data &&
-          data.map((item) => (
-            <ProductRow product={item}/>
-          ))
-        }
+        {data && data.map((item) => <ProductRow product={item} />)}
       </div>
     </div>
   );

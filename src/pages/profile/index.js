@@ -1,22 +1,27 @@
 import classNames from "classnames/bind";
 import styles from "./profile.module.scss";
 import { useGlobalState } from "~/provider/useGlobalState";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import { useState } from "react";
 import Input from "~/components/input";
 import Button from "~/components/button";
-import { faAdd } from "@fortawesome/free-solid-svg-icons";
 import { setLoading, setPopup } from "~/provider/action";
 import axios from "axios";
 import { apiLink, userKey } from "~/key";
-import { isPhone, max100, max30, max50, notEmpty, validateForm } from "~/validation";
+import {
+  isPhone,
+  max100,
+  max30,
+  max50,
+  notEmpty,
+  validateForm,
+} from "~/validation";
 
 const cx = classNames.bind(styles);
 
 function Profile() {
   const [, dispatch] = useGlobalState();
-  const navigate = useNavigate();
 
   const [disabled, setDisabled] = useState(true);
 
@@ -29,7 +34,7 @@ function Profile() {
   const [award, setAward] = useState("");
   const [detail, setDetail] = useState("");
   const [selectImage, setSelectImage] = useState();
-  const [avatar, setAvatar] = useState("")
+  const [avatar, setAvatar] = useState("");
 
   const [photoMessage, setPhotoMessage] = useState("");
 
@@ -43,51 +48,53 @@ function Profile() {
   const detailRef = useRef();
   const uploadRef = useRef();
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
 
-  useEffect(()=>{
-    const user = JSON.parse(localStorage.getItem(userKey))
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem(userKey));
     const headers = {
-      Authorization: 'Bearer '+ user.accsess_token
-    }
+      Authorization: "Bearer " + user.accsess_token,
+    };
     dispatch(setLoading(true));
-    if(!id){
-      axios.get(`${apiLink}user/me-profile`, { headers })
-    .then(res => {
-      setEmail(res.data.data.email)
-      setName(res.data.data.name)
-      setCode(res.data.data.code)
-      setPhone(res.data.data.phone)
-      setProvince(res.data.data.address?.province)
-      setDistrict(res.data.data.address?.district)
-      setAward(res.data.data.address?.award)
-      setDetail(res.data.data.address?.detail)
-      dispatch(setLoading(false));
-    })
-    .catch(e=>{
-      dispatch(setPopup({ type: false, text: 'Có lỗi thử lại sau' }));
-      dispatch(setLoading(false));
-    })
-    }else{
+    if (!id) {
+      axios
+        .get(`${apiLink}user/me-profile`, { headers })
+        .then((res) => {
+          setEmail(res.data.data.email);
+          setName(res.data.data.name);
+          setCode(res.data.data.code);
+          setPhone(res.data.data.phone);
+          setProvince(res.data.data.address?.province);
+          setDistrict(res.data.data.address?.district);
+          setAward(res.data.data.address?.award);
+          setDetail(res.data.data.address?.detail);
+          dispatch(setLoading(false));
+        })
+        .catch((e) => {
+          dispatch(setPopup({ type: false, text: "Có lỗi thử lại sau" }));
+          dispatch(setLoading(false));
+        });
+    } else {
       dispatch(setLoading(true));
-      axios.post(`${apiLink}user/admin-MeProfile`,{ user_id: id }, { headers })
-    .then(res => {
-      setEmail(res.data.data.email)
-      setName(res.data.data.name)
-      setCode(res.data.data.code)
-      setPhone(res.data.data.phone)
-      setProvince(res.data.data.address?.province)
-      setDistrict(res.data.data.address?.district)
-      setAward(res.data.data.address?.award)
-      setDetail(res.data.data.address?.detail)
-    })
-    .catch(e=>{
-      dispatch(setPopup({ type: false, text: 'Có lỗi thử lại sau' }));
-      dispatch(setLoading(false));
-    })
+      axios
+        .post(`${apiLink}user/admin-MeProfile`, { user_id: id }, { headers })
+        .then((res) => {
+          setEmail(res.data.data.email);
+          setName(res.data.data.name);
+          setCode(res.data.data.code);
+          setPhone(res.data.data.phone);
+          setProvince(res.data.data.address?.province);
+          setDistrict(res.data.data.address?.district);
+          setAward(res.data.data.address?.award);
+          setDetail(res.data.data.address?.detail);
+        })
+        .catch((e) => {
+          dispatch(setPopup({ type: false, text: "Có lỗi thử lại sau" }));
+          dispatch(setLoading(false));
+        });
     }
-  }, [])
+  }, []);
 
   function handleUpload() {
     const file = uploadRef.current.files[0];
@@ -98,7 +105,7 @@ function Profile() {
     };
     if (file) {
       reader.readAsDataURL(file);
-      setAvatar(file.name)
+      setAvatar(file.name);
     }
     setPhotoMessage("");
   }
@@ -145,39 +152,39 @@ function Profile() {
     const validateAvatar = validateForm(avatar, [notEmpty, max100]);
     if (typeof validateAvatar === "string") {
       flag = false;
-      setPhotoMessage(validateAvatar)
+      setPhotoMessage(validateAvatar);
     }
 
-    // setDisabled(true)
-    if(flag){
+    if (flag) {
+      const formData = new FormData();
+      formData.append("email", email);
+      formData.append("code", code);
+      formData.append("name", name);
+      formData.append("phone", phone);
+      formData.append("province", province);
+      formData.append("district", district);
+      formData.append("award", award);
+      formData.append("detail", detail);
+      formData.append("image", selectImage);
 
-      const formData = new FormData()
-      formData.append("email", email)
-      formData.append("code", code)
-      formData.append("name", name)
-      formData.append("phone", phone)
-      formData.append("province", province)
-      formData.append("district", district)
-      formData.append("award", award)
-      formData.append("detail", detail)
-      formData.append("image",selectImage)
-
-      const user = JSON.parse(localStorage.getItem(userKey))
-    const headers = {
-      Authorization: 'Bearer '+ user.accsess_token
-    }
-    dispatch(setLoading(true));
-    axios.patch(`${apiLink}user/updateMe`, formData, { headers })
-    .then(res => {
-      dispatch(setPopup({ type: true, text: res.data?.message }));
-      setDisabled(true)
-      dispatch(setLoading(false));
-    })
-    .catch(res=>{
-      dispatch(setPopup({ type: false, text: res.response?.data?.message }));
-      dispatch(setLoading(false));
-    })
-      
+      const user = JSON.parse(localStorage.getItem(userKey));
+      const headers = {
+        Authorization: "Bearer " + user.accsess_token,
+      };
+      dispatch(setLoading(true));
+      axios
+        .patch(`${apiLink}user/updateMe`, formData, { headers })
+        .then((res) => {
+          dispatch(setPopup({ type: true, text: res.data?.message }));
+          setDisabled(true);
+          dispatch(setLoading(false));
+        })
+        .catch((res) => {
+          dispatch(
+            setPopup({ type: false, text: res.response?.data?.message })
+          );
+          dispatch(setLoading(false));
+        });
     }
   }
 
@@ -250,7 +257,7 @@ function Profile() {
             disabled={disabled}
           />
           <Input
-            type="number"
+            type="text"
             setRef={phoneRef}
             topic={"Số điện thoại"}
             state={phone}
@@ -301,22 +308,20 @@ function Profile() {
             disabled={disabled}
           />
         </div>
-        {
-          !id &&  (disabled ? <div className={cx("button")}>
-          <Button
-            disabled={disabled}
-            onSubmit={()=>setDisabled(false)}
-            text="Sửa"
-          />
-        </div> : 
-        <div className={cx("button")}>
-          <Button
-            disabled={disabled}
-            onSubmit={handleSubmit}
-            text="Lưu"
-          />
-        </div>)
-        }
+        {!id &&
+          (disabled ? (
+            <div className={cx("button")}>
+              <Button
+                disabled={disabled}
+                onSubmit={() => setDisabled(false)}
+                text="Sửa"
+              />
+            </div>
+          ) : (
+            <div className={cx("button")}>
+              <Button disabled={disabled} onSubmit={handleSubmit} text="Lưu" />
+            </div>
+          ))}
       </div>
     </div>
   );

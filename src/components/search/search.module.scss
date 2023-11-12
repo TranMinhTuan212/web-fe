@@ -17,6 +17,7 @@
 .btn-search{
     border-top-left-radius: 3rem;
     border-bottom-left-radius: 3rem;
+    color: white;
 }
 
 .input-search{
@@ -33,6 +34,7 @@
     right: -4rem;
     top: 0;
     display: none;
+    color: white;
 }
 
 .show{
@@ -52,44 +54,57 @@
 .search-result{
     border-radius: 1rem;
     height: 39rem;
-    background-color: #34224f;
+    background-color: white;
     padding: 1rem;
     position: relative;
+    overflow: hidden;
+    overflow: scroll;
+    background-color: var(--background-005);
+    color: var(--text-normal);
+}
+
+.search-result::-webkit-scrollbar {
+    width: 0rem;
 }
 
 .more{
     position: absolute;
     bottom: 0;
-    left: 10rem;
-    right: 10rem;
+    left: 0;
+    right: 0;
     text-align: center;
     padding: 1rem;
     cursor: pointer;
-    opacity: .8;
     border-top: .1rem solid #ccc;
+    background-color: var(--background-005);
+    color: white;
+}
 
-    &:hover{
-        opacity: 1;
-    }
+.link{
+    text-decoration: none;
+    color: white;
 }
 
 .result-item{
+    padding-left: 1rem;
     display: flex;
     align-items: center;
-    padding: 1rem;
-    border-radius: 1rem;
+    border-radius: .4rem;
     cursor: pointer;
+    text-decoration: none;
+    color: white;
 
     &:hover{
-        background-color: #40384e;
+        background-color: var(--hover-max-color);
     }
 }
 
 .picture{
-    width: 5rem;
-    height: 6rem;
-    border-radius: 1rem;
+    width: 8rem;
+    height: 8rem;
+    border-radius: .4rem;
     overflow: hidden;
+    padding: .4rem;
 }
 
 .image{
@@ -99,6 +114,12 @@
 
 .name{
     margin-left: 2rem;
+}
+
+.price{
+    margin-left: 2rem;
+    font-size: 1.4rem;
+    color: var(--hover-min-color);
 }
 
 .loader {

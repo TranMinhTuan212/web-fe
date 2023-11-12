@@ -75,6 +75,15 @@ function Header() {
             />
           </div>
           <div className={cx("user-option")}>
+          <div className={cx("user-option-item")}>
+              <Button
+                icon={faRightFromBracket}
+                onSubmit={() => handleLogout()}
+                textButton
+                text={user?.name}
+                disable={true}
+              />
+            </div>
             <div className={cx("user-option-item")}>
               <Button
                 icon={faRightFromBracket}

@@ -17,6 +17,8 @@ function Shop() {
   const [data, setData] = useState([])
   const [keyWord, setKey] = useState('')
   const [state, dispatch] = useGlobalState()
+  const [product, setProduct] = useState({})
+  const [quantity, setQuantity] = useState(1)
 
   useEffect(()=>{
     const user = JSON.parse(localStorage.getItem(userKey))
@@ -43,7 +45,7 @@ function Shop() {
       <div className={cx("product")}>
         {
           data && data.map((item) => (
-            <Product product={item} onClick={() => setModal(true)} />
+            <Product product={item} onClick={() => {setModal(true);setProduct(item)}} />
           ))
         }
       </div>
@@ -61,28 +63,28 @@ function Shop() {
             <div className={cx("content")}>
               <div className={cx("row")}>
                 <div className={cx("left")}>Name</div>
-                <div className={cx("right")}>Thỏ Con Cute</div>
+                <div className={cx("right")}>{product.name}</div>
               </div>
               <div className={cx("row")}>
                 <div className={cx("left")}>Price</div>
-                <div className={cx("right")}>100.000$</div>
+                <div className={cx("right")}>{product.price}$</div>
               </div>
               <div className={cx("row")}>
                 <div className={cx("left")}>Origin</div>
-                <div className={cx("right")}>Trung Quốc</div>
+                <div className={cx("right")}>{product.origin}</div>
               </div>
               <div className={cx("row")}>
                 <div className={cx("left")}>Category</div>
-                <div className={cx("right")}>Đồ Nhậu</div>
+                <div className={cx("right")}>{product.categoryName}</div>
               </div>
               <div className={cx("row")}>
                 <div className={cx("left")}>Unit</div>
-                <div className={cx("right")}>Con</div>
+                <div className={cx("right")}>{product.unit}</div>
               </div>
               <div className={cx("row")}>
                 <div className={cx("left")}>Quantity</div>
                 <div className={cx("right")}>
-                <Input type="number"/>
+                <Input state={quantity} setState={setQuantity} type="number"/>
                 </div>
                 
               </div>
@@ -90,7 +92,7 @@ function Shop() {
           </div>
           <div className={cx("button")}>
             <Button danger onSubmit={()=>setModal(false)} right text="Hủy Bỏ" />
-            <Button left text="Xác Nhận" />
+            <Button onSubmit={()=>console.log(product, quantity)} left text="Xác Nhận" />
           </div>
         </div>
       </ReactModal>

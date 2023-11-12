@@ -104,7 +104,7 @@ function ProductDetail() {
       default:
         break;
     }
-  }, [disable]);
+  }, [disable, _id]);
 
   function handleUpload() {
     const file = uploadRef.current.files[0];
