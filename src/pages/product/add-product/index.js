@@ -40,6 +40,7 @@ function AddProduct() {
   const [origin, setOrigin] = useState("");
   const [unit, setUnit] = useState("");
   const [image, setImage] = useState("");
+  const [avatarFile, setAvatarFile] = useState(null)
 
   const [selectImage, setSelectImage] = useState();
 
@@ -54,7 +55,7 @@ function AddProduct() {
   function handleUpload() {
     const file = uploadRef.current.files[0];
     const reader = new FileReader();
-
+    setAvatarFile(file)
     reader.onloadend = () => {
       setSelectImage(reader.result);
     };
@@ -132,10 +133,11 @@ function AddProduct() {
         description,
         discount: +discount,
         categoryId,
-        image,
         origin,
         unit,
       };
+      const formData = new FormData()
+      formData.append('image', avatarFile)
       dispatch(setLoading(true));
       const user = JSON.parse(localStorage.getItem(userKey))
 
@@ -148,9 +150,19 @@ function AddProduct() {
       dispatch(setLoading(true))
       axios
         .post(`${apiLink}product/create`, data, { headers })
-        .then((res) => {
-          dispatch(setPopup({ type: true, text: res.data?.message }))
-          resetInput();
+        .then((res)=>{
+            axios.post(`${apiLink}product/upload?productId=${res.data?.productId}`, formData, { headers })
+            .then((res)=>{
+              dispatch(setPopup({ type: true, text: res.data?.message }));
+              dispatch(setLoading(false));
+              resetInput()
+          })
+          .catch((res) => {
+            dispatch(
+              setPopup({ type: false, text: res.response?.data?.message })
+            );
+            dispatch(setLoading(false));
+          })
         })
         .catch((res)=>{
           dispatch(setLoading(false))
@@ -181,7 +193,7 @@ function AddProduct() {
           }}
           className={cx("photo")}
         >
-          <img className={cx("photo-demo")} src={selectImage} alt="" />
+          <img className={cx("photo-demo")} src={selectImage || `${apiLink}avatar`} alt="" />
           <input
             onChange={handleUpload}
             ref={uploadRef}

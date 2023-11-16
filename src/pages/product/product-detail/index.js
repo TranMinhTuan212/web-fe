@@ -27,6 +27,7 @@ function ProductDetail() {
   const originMessageRef = useRef();
   const unitMessageRef = useRef();
 
+  const [id, setId] = useState('')
   const [name, setName] = useState("");
   const [barcode, setBarcode] = useState("");
   const [price, setPrice] = useState("");
@@ -34,7 +35,8 @@ function ProductDetail() {
   const [discount, setDiscount] = useState("");
   const [origin, setOrigin] = useState("");
   const [unit, setUnit] = useState("");
-  const [image, setImage] = useState("");
+  const [avatar, setAvatar] = useState('')
+  const [avatarFile, setAvatarFile] = useState('')
 
   const [selectImage, setSelectImage] = useState();
 
@@ -93,6 +95,8 @@ function ProductDetail() {
               setOrigin(product.origin);
               setDescription(product.description);
               setDiscount(product.discount);
+              setAvatar(product.image)
+              setId(product._id)
             }
             dispatch(setLoading(false));
           })
@@ -109,14 +113,10 @@ function ProductDetail() {
   function handleUpload() {
     const file = uploadRef.current.files[0];
     const reader = new FileReader();
-
+    setAvatarFile(file)
     reader.onloadend = () => {
       setSelectImage(reader.result);
     };
-    if (file) {
-      reader.readAsDataURL(file);
-      setImage(file.name);
-    }
     setPhotoMessage("");
   }
 
@@ -161,7 +161,7 @@ function ProductDetail() {
         const fileValidate = validateForm(uploadRef.current.files[0], [
           typeFile,
         ]);
-        if (typeof fileValidate === "string") {
+        if (typeof fileValidate === "string" && !avatar) {
           flag = false;
           setPhotoMessage(fileValidate);
         }
@@ -175,10 +175,11 @@ function ProductDetail() {
             description,
             discount,
             categoryId,
-            image,
             origin,
             unit,
           };
+          const formData = new FormData()
+          formData.append('image', avatarFile)
           dispatch(setLoading(true));
           const user = JSON.parse(localStorage.getItem(userKey));
 
@@ -191,12 +192,27 @@ function ProductDetail() {
           dispatch(setLoading(true));
           axios
             .put(`${apiLink}product/update`, data, { headers })
-            .then((res) => {
-              dispatch(setPopup({ type: true, text: res.data?.message }));
-              setDisabled(true);
-              resetInput();
+            .then(()=>{
+              if(avatar){
+                axios.post(`${apiLink}product/upload?productId=${id}`, formData, { headers })
+                .then((res)=>{
+                  dispatch(setPopup({ type: true, text: res.data?.message }));
+                  dispatch(setLoading(false));
+                  resetInput()
+                  setDisabled(true)
+              })
+              .catch((res) => {
+                dispatch(
+                  setPopup({ type: false, text: res.response?.data?.message })
+                );
+                dispatch(setLoading(false));
+              })
+            }else{
+              dispatch(setPopup({ type: true, text: 'Cập nhật thành công !' }));
               dispatch(setLoading(false));
-            })
+              setDisabled(true)
+            }
+              })
             .catch((res) => {
               dispatch(setLoading(false));
               dispatch(setPopup({ type: false, text: res.data?.message }));
@@ -229,7 +245,7 @@ function ProductDetail() {
           }}
           className={cx("photo")}
         >
-          <img className={cx("photo-demo")} src={selectImage} alt="" />
+          <img className={cx("photo-demo")} src={selectImage || `${apiLink}avatar`} alt="" />
           <input
             disabled={disable}
             onChange={handleUpload}
