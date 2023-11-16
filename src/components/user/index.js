@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const cx = classNames.bind(styles);
 
-function User({ topic = false, user = {}, callBack = ()=>{} }) {
+function User({ topic = false, user = {}, callBack = () => {} }) {
   if (topic) {
     return (
       <div className={cx("topic")}>
@@ -38,7 +38,16 @@ function User({ topic = false, user = {}, callBack = ()=>{} }) {
         <div className={cx("text", "origin")}>{user.email}</div>
         <div className={cx("text", "unit")}>{user.phone}</div>
         <div className={cx("text", "quantity")}>100</div>
-        <div onClick={()=>callBack(user._id)} className={cx("text", "discount", "remove")}><FontAwesomeIcon icon={faTrashCan} /></div>
+        <div
+          onClick={(e) => {
+            callBack(user._id);
+            e.preventDefault();
+            e.stopPropagation();
+          }}
+          className={cx("text", "discount", "remove")}
+        >
+          <FontAwesomeIcon icon={faTrashCan} />
+        </div>
       </Link>
     );
   }

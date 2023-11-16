@@ -15,7 +15,7 @@ import Search from "../search";
 import Button from "../button";
 import { useGlobalState } from "~/provider/useGlobalState";
 import { setLogin } from "~/provider/action";
-import { userKey } from "~/key";
+import { apiLink, userKey } from "~/key";
 import { useNavigate } from "react-router-dom";
 import { pages } from "~/config";
 import { ERole } from "~/enum";
@@ -70,7 +70,7 @@ function Header() {
           <div className={cx("user-avatar")}>
             <img
               className={cx("avatar")}
-              src={process.env.PUBLIC_URL + "/images/phong.jpg"}
+              src={`${apiLink}${user?.avatar}`}
               alt=""
             />
           </div>

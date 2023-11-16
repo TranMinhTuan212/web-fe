@@ -51,16 +51,20 @@ function Customer() {
     }
   }, [key]);
 
-  function onDelete(e) {console.log(e)
+  function onDelete(e) {
+    const user = JSON.parse(localStorage.getItem(userKey))
+    const headers = {
+      Authorization: 'Bearer '+ user.accsess_token
+    }
     dispatch(setLoading(true));
     axios
-      .delete(`${apiLink}user/deleteUser/`, { _id: e })
+      .post(`${apiLink}user/deleteUser/`, { _id: e }, { headers })
       .then((res) => {
         dispatch(setPopup({ type: true, text: res.data?.message }));
       })
       .then(() => {
         axios
-          .get(`${apiLink}user/allmetable-profile`)
+          .get(`${apiLink}user/allmetable-profile`, { headers })
           .then((res) => {
             setData(res.data.data);
           })

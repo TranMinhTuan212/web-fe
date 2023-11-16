@@ -35,6 +35,10 @@ function Profile() {
   const [detail, setDetail] = useState("");
   const [selectImage, setSelectImage] = useState();
   const [avatar, setAvatar] = useState("");
+  const [image, setImage] = useState('')
+  const [photo, setPhoto] = useState('')
+  const [version, setVersion] = useState('')
+  const [render, setRender] = useState(false)
 
   const [photoMessage, setPhotoMessage] = useState("");
 
@@ -69,6 +73,8 @@ function Profile() {
           setDistrict(res.data.data.address?.district);
           setAward(res.data.data.address?.award);
           setDetail(res.data.data.address?.detail);
+          setPhoto(res.data.data.avatar)
+          setVersion(res.data.data.version)
           dispatch(setLoading(false));
         })
         .catch((e) => {
@@ -88,18 +94,20 @@ function Profile() {
           setDistrict(res.data.data.address?.district);
           setAward(res.data.data.address?.award);
           setDetail(res.data.data.address?.detail);
+          dispatch(setLoading(false));
         })
         .catch((e) => {
           dispatch(setPopup({ type: false, text: "Có lỗi thử lại sau" }));
           dispatch(setLoading(false));
         });
     }
-  }, []);
+  }, [render]);
 
   function handleUpload() {
     const file = uploadRef.current.files[0];
     const reader = new FileReader();
 
+    setImage(file)
     reader.onloadend = () => {
       setSelectImage(reader.result);
     };
@@ -150,22 +158,26 @@ function Profile() {
     }
 
     const validateAvatar = validateForm(avatar, [notEmpty, max100]);
-    if (typeof validateAvatar === "string") {
+    if (typeof validateAvatar === "string" && !photo) {
       flag = false;
       setPhotoMessage(validateAvatar);
     }
 
     if (flag) {
-      const formData = new FormData();
-      formData.append("email", email);
-      formData.append("code", code);
-      formData.append("name", name);
-      formData.append("phone", phone);
-      formData.append("province", province);
-      formData.append("district", district);
-      formData.append("award", award);
-      formData.append("detail", detail);
-      formData.append("image", selectImage);
+      const data = {
+        email,
+        code,
+        name,
+        phone,
+        province,
+        district,
+        award,
+        detail,
+        version
+      }
+
+      const formData = new FormData()
+      formData.append('image', image)
 
       const user = JSON.parse(localStorage.getItem(userKey));
       const headers = {
@@ -173,11 +185,29 @@ function Profile() {
       };
       dispatch(setLoading(true));
       axios
-        .patch(`${apiLink}user/updateMe`, formData, { headers })
+        .patch(`${apiLink}user/updateMe`, data, { headers })
         .then((res) => {
-          dispatch(setPopup({ type: true, text: res.data?.message }));
+          localStorage.setItem(userKey ,JSON.stringify({ ...user, ...res.data.data }))
           setDisabled(true);
-          dispatch(setLoading(false));
+        }).then(()=>{
+          if(image){
+            axios.post(`${apiLink}user/upload-image`, formData, { headers })
+          .then((res)=>{
+            dispatch(setPopup({ type: true, text: res.data?.message }));
+            dispatch(setLoading(false));
+            setRender(e=>!e)
+          })
+          .catch((res) => {
+            dispatch(
+              setPopup({ type: false, text: res.response?.data?.message })
+            );
+            dispatch(setLoading(false));
+          })
+          }else{
+            dispatch(setPopup({ type: true, text: 'Cập nhật thành công !' }));
+            dispatch(setLoading(false));
+            setRender(e=>!e)
+          }
         })
         .catch((res) => {
           dispatch(
@@ -197,7 +227,7 @@ function Profile() {
           }}
           className={cx("photo")}
         >
-          <img className={cx("photo-demo")} src={selectImage} alt="" />
+          <img className={cx("photo-demo")} src={selectImage || `${apiLink}${photo}`} alt="" />
           <input
             disabled={disabled}
             onChange={handleUpload}
