@@ -156,6 +156,7 @@ function AddProduct() {
               dispatch(setPopup({ type: true, text: res.data?.message }));
               dispatch(setLoading(false));
               resetInput()
+              navigate(pages.product)
           })
           .catch((res) => {
             dispatch(

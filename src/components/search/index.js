@@ -84,7 +84,7 @@ function Search() {
                   <div className={cx("picture")}>
                     <img
                       className={cx("image")}
-                      src={process.env.PUBLIC_URL + "/images/tho.jpg"}
+                      src={apiLink + result.image}
                       alt="kết quả"
                     />
                   </div>

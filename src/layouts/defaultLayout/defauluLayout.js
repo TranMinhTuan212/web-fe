@@ -24,8 +24,7 @@ function DefaultLayout({ children }) {
   }
 
   useEffect(()=>{
-    setInterval(()=>{
-      const user = JSON.parse(localStorage.getItem(userKey))
+    const user = JSON.parse(localStorage.getItem(userKey))
     const headers = {
       Authorization: 'Bearer '+ user.accsess_token
     }
@@ -37,7 +36,6 @@ function DefaultLayout({ children }) {
       navigate(pages.login)
     })
     dispatch(setLoading(false))
-    }, 10000)
   }, [])
 
   return (

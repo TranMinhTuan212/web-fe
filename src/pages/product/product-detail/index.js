@@ -37,6 +37,7 @@ function ProductDetail() {
   const [unit, setUnit] = useState("");
   const [avatar, setAvatar] = useState('')
   const [avatarFile, setAvatarFile] = useState('')
+  const [version, setVersion] = useState('')
 
   const [selectImage, setSelectImage] = useState();
 
@@ -96,6 +97,7 @@ function ProductDetail() {
               setDescription(product.description);
               setDiscount(product.discount);
               setAvatar(product.image)
+              setVersion(product.version)
               setId(product._id)
             }
             dispatch(setLoading(false));
@@ -180,7 +182,8 @@ function ProductDetail() {
             discount,
             categoryId,
             origin,
-            unit
+            unit,
+            version
           };
           const formData = new FormData()
           formData.append('image', avatarFile)
