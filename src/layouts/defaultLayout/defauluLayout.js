@@ -24,11 +24,11 @@ function DefaultLayout({ children }) {
   }
 
   useEffect(()=>{
-    const user = JSON.parse(localStorage.getItem(userKey))
+    setInterval(()=>{
+      const user = JSON.parse(localStorage.getItem(userKey))
     const headers = {
       Authorization: 'Bearer '+ user.accsess_token
     }
-    console.log(headers)
     dispatch(setLoading(true))
     axios.post(`${apiLink}user/check-token`,{}, { headers })
     .then(()=>{})
@@ -37,6 +37,7 @@ function DefaultLayout({ children }) {
       navigate(pages.login)
     })
     dispatch(setLoading(false))
+    }, 10000)
   }, [])
 
   return (

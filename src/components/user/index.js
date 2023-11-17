@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { pages } from "~/config";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { apiLink } from "~/key";
 
 const cx = classNames.bind(styles);
 
@@ -28,9 +29,8 @@ function User({ topic = false, user = {}, callBack = () => {} }) {
         <div className={cx("photo")}>
           <img
             className={cx("image")}
-            src={process.env.PUBLIC_URL + "/images/phong.jpg"}
-            // src={`${apiLink}/imageMedias/` + user.photo}
-            alt="thỏ"
+            src={apiLink + user.avatar}
+            alt=""
           />
         </div>
         <div className={cx("text", "name")}>{user.code}</div>

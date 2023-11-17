@@ -117,6 +117,10 @@ function ProductDetail() {
     reader.onloadend = () => {
       setSelectImage(reader.result);
     };
+    if (file) {
+      reader.readAsDataURL(file);
+      setAvatar(file.name);
+    }
     setPhotoMessage("");
   }
 
@@ -170,13 +174,13 @@ function ProductDetail() {
           const data = {
             _id,
             name,
-            barcode,
+            code: barcode,
             price,
             description,
             discount,
             categoryId,
             origin,
-            unit,
+            unit
           };
           const formData = new FormData()
           formData.append('image', avatarFile)
@@ -245,7 +249,7 @@ function ProductDetail() {
           }}
           className={cx("photo")}
         >
-          <img className={cx("photo-demo")} src={selectImage || `${apiLink}avatar`} alt="" />
+          <img className={cx("photo-demo")} src={selectImage || `${apiLink}${avatar}`} alt="" />
           <input
             disabled={disable}
             onChange={handleUpload}

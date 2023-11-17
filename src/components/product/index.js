@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { pages } from "~/config";
+import { apiLink } from "~/key";
 
 const cx = classNames.bind(styles);
 
@@ -14,7 +15,7 @@ function Product({ onClick = () => {}, product = {} }) {
       <div className={cx("image")}>
         <img
           className={cx("image-item")}
-          src={process.env.PUBLIC_URL + "/images/tho.jpg"}
+          src={apiLink + product.image}
           alt=""
         />
       </div>

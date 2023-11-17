@@ -2,6 +2,7 @@ import classNames from "classnames/bind";
 import styles from './product-row.module.scss'
 import { Link } from "react-router-dom";
 import { pages } from "~/config";
+import { apiLink } from "~/key";
 
 const cx = classNames.bind(styles)
 
@@ -30,7 +31,7 @@ function ProductRow({ topic = false, product = {} }) {
         return ( 
             <Link to={`${pages.productDetail}?id=${product._id}&pageType=view`} className={cx('wapper')}>
                 <div className={cx('photo')}>
-                    <img className={cx('image')} src={process.env.PUBLIC_URL + '/images/tho.jpg'} alt="thỏ"/>
+                    <img className={cx('image')} src={apiLink + product.image} alt=""/>
                 </div>
                 <div className={cx('text','name')}>{product.name}</div>
                 <div className={cx('text','price')}>{formatter.format(product.price)}</div>

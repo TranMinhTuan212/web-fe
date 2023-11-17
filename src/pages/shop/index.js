@@ -56,7 +56,7 @@ function Shop() {
             <div className={cx("image")}>
               <img
                 className={cx("photo")}
-                src={process.env.PUBLIC_URL + "/images/tho.jpg"}
+                src={apiLink + product.image}
                 alt=""
               />
             </div>
