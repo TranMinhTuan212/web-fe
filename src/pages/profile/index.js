@@ -94,6 +94,7 @@ function Profile() {
           setDistrict(res.data.data.address?.district);
           setAward(res.data.data.address?.award);
           setDetail(res.data.data.address?.detail);
+          setPhoto(res.data.data.avatar)
           dispatch(setLoading(false));
         })
         .catch((e) => {
