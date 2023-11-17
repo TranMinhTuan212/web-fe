@@ -28,6 +28,9 @@ function DefaultLayout({ children }) {
     const headers = {
       Authorization: 'Bearer '+ user?.accsess_token
     }
+    if(!user){
+      return navigate(pages.login)
+    }
     dispatch(setLoading(true))
     axios.post(`${apiLink}user/check-token`,{}, { headers })
     .then(()=>{})

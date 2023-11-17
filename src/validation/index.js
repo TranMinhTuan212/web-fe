@@ -107,6 +107,8 @@ function typeFile(file) {
     // eslint-disable-next-line no-duplicate-case
     case "jpg":
       return true;
+    case "jfif":
+      return true;
     default:
       return message.FILE_FORMAT;
   }
