@@ -26,7 +26,7 @@ function DefaultLayout({ children }) {
   useEffect(()=>{
     const user = JSON.parse(localStorage.getItem(userKey))
     const headers = {
-      Authorization: 'Bearer '+ user.accsess_token
+      Authorization: 'Bearer '+ user?.accsess_token
     }
     dispatch(setLoading(true))
     axios.post(`${apiLink}user/check-token`,{}, { headers })

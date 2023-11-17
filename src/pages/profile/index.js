@@ -201,7 +201,7 @@ function Profile() {
           })
           .catch((res) => {
             dispatch(
-              setPopup({ type: false, text: res.response?.data?.message })
+              setPopup({ type: false, text: res.response?.data?.message || 'Có lỗi thử lại sau !' })
             );
             dispatch(setLoading(false));
           })
@@ -213,7 +213,7 @@ function Profile() {
         })
         .catch((res) => {
           dispatch(
-            setPopup({ type: false, text: res.response?.data?.message })
+            setPopup({ type: false, text: res.response?.data?.message || 'Có lỗi thử lại sau !' })
           );
           dispatch(setLoading(false));
         });

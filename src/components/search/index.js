@@ -23,7 +23,6 @@ function Search() {
 
   function handleSearch() {
     const result = inputRef.current.value;
-    // getDataSearch(result);
     setKeyword(result);
   }
 
@@ -33,32 +32,28 @@ function Search() {
     } else {
       setClose(false);
     }
-  }, [keyword]);
 
-  // function getDataSearch(value) {
-
-  // }
-
-  useEffect(() => {
     let loadData = null;
     const user = JSON.parse(localStorage.getItem(userKey));
-    const headers = {
-      Authorization: "Bearer " + user.accsess_token,
-    };
-    if (keyword.trim().length > 0) {
-      loadData = setTimeout(() => {
-        setLoading(true);
-        setClose(false);
-        axios
-          .post(`${apiLink}product/search`, { keyword }, { headers })
-          .then((res) => {
-            setSearchResult(res.data?.data);
-            setLoading(false);
-            setClose(true);
-          });
-      }, 700);
-    } else {
-      setSearchResult([]);
+    if(user){
+      const headers = {
+        Authorization: "Bearer " + user.accsess_token,
+      };
+      if (keyword.trim().length > 0) {
+        loadData = setTimeout(() => {
+          setLoading(true);
+          setClose(false);
+          axios
+            .post(`${apiLink}product/search`, { keyWord: keyword }, { headers })
+            .then((res) => {
+              setSearchResult(res.data?.data);
+              setLoading(false);
+              setClose(true);
+            });
+        }, 700);
+      } else {
+        setSearchResult([]);
+      }
     }
 
     return () => clearTimeout(loadData);

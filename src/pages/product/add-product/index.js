@@ -160,14 +160,14 @@ function AddProduct() {
           })
           .catch((res) => {
             dispatch(
-              setPopup({ type: false, text: res.response?.data?.message })
+              setPopup({ type: false, text: res.response?.data?.message || 'Có lỗi thử lại sau !' })
             );
             dispatch(setLoading(false));
           })
         })
         .catch((res)=>{
           dispatch(setLoading(false))
-          dispatch(setPopup({ type: false, text: res.response.data?.message }))
+          dispatch(setPopup({ type: false, text: res.response.data?.message || 'Có lỗi thử lại sau !' }))
         })
         dispatch(setLoading(false))
     }

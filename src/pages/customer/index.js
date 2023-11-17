@@ -28,8 +28,8 @@ function Customer() {
       axios
         .post(`${apiLink}user/search-user/`, data, { headers })
         .then((res) => {
-          if (res.data.data) {
-            setData(res.data.data);
+          if (res?.data?.data) {
+            setData(res?.data?.data);
           }
           dispatch(setLoading(false));
         })
@@ -41,7 +41,7 @@ function Customer() {
       axios
         .get(`${apiLink}user/allmetable-profile`, { headers })
         .then((res) => {
-          setData(res.data.data);
+          setData(res?.data?.data);
           dispatch(setLoading(false));
         })
         .catch((e) => {
@@ -69,7 +69,7 @@ function Customer() {
             setData(res.data.data);
           })
           .catch((e) => {
-            dispatch(setPopup({ type: false, text: e.response.data?.message }));
+            dispatch(setPopup({ type: false, text: e.response?.data?.message || 'Có lỗi thử lại sau' }));
           });
       })
       .catch((e) => {

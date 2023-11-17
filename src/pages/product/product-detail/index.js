@@ -69,7 +69,9 @@ function ProductDetail() {
         });
         setCategoryList(list);
         if (list.length > 0) {
-          setCategoryId(list[0].value);
+          if(!_id){
+            setCategoryId(list[0].value);
+          }
         }
         dispatch(setLoading(false));
       })
@@ -87,7 +89,7 @@ function ProductDetail() {
         axios
           .post(`${apiLink}product/detail`, { _id })
           .then((res) => {
-            if (res.data.data) {
+            if (res?.data?.data) {
               const product = res.data.data.product;
               setName(product.name);
               setBarcode(product.code);
@@ -99,11 +101,12 @@ function ProductDetail() {
               setAvatar(product.image)
               setVersion(product.version)
               setId(product._id)
+              setCategoryId(product.categoryId);
             }
             dispatch(setLoading(false));
           })
           .catch((e) => {
-            dispatch(setPopup({ type: false, text: e.response.data?.message }));
+            dispatch(setPopup({ type: false, text: e?.response?.data?.message || 'Có lỗi thử lại sau' }));
             dispatch(setLoading(false));
           });
         break;
@@ -200,7 +203,7 @@ function ProductDetail() {
           axios
             .put(`${apiLink}product/update`, data, { headers })
             .then(()=>{
-              if(avatar){
+              if(avatarFile){
                 axios.post(`${apiLink}product/upload?productId=${id}`, formData, { headers })
                 .then((res)=>{
                   dispatch(setPopup({ type: true, text: res.data?.message }));
@@ -210,7 +213,7 @@ function ProductDetail() {
               })
               .catch((res) => {
                 dispatch(
-                  setPopup({ type: false, text: res.response?.data?.message })
+                  setPopup({ type: false, text: res.response?.data?.message || 'Có lỗi thử lại sau !' })
                 );
                 dispatch(setLoading(false));
               })
@@ -222,7 +225,7 @@ function ProductDetail() {
               })
             .catch((res) => {
               dispatch(setLoading(false));
-              dispatch(setPopup({ type: false, text: res.data?.message }));
+              dispatch(setPopup({ type: false, text: res.data?.message || 'Có lỗi thử lại sau' }));
             });
         }
         break;
@@ -345,7 +348,11 @@ function ProductDetail() {
             onChange={(e) => {
               setCategoryId(e[0]?.value);
             }}
-            values={[categoryList[0] || { _id: 1, label: "" }]}
+            defaultValue={{
+              value: categoryId,
+              label: categoryList.filter((item) => item.value === categoryId)[0]?.label,
+            }}
+            values={[ { value: categoryId, label: categoryList.filter(item=>item.value === categoryId)[0]?.label }]}
             color="#6a6474"
             className={cx("my-dropdown")}
             options={categoryList || []}

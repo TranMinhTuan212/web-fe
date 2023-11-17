@@ -70,7 +70,7 @@ function Password() {
         resetInput()
       })
       .catch((res)=>{
-        dispatch(setPopup({ type: false, text: res.response.data?.message }));
+        dispatch(setPopup({ type: false, text: res.response?.data?.message || 'Có lỗi thử lại sau' }));
         dispatch(setLoading(false));
       })
     }

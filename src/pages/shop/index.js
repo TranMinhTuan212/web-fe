@@ -35,7 +35,7 @@ function Shop() {
           dispatch(setLoading(false));
         })
         .catch((e) => {
-          dispatch(setPopup({ type: false, text: e.response.data?.message }));
+          dispatch(setPopup({ type: false, text: e.response.data?.message || 'Có lỗi thử lại sau' }));
           dispatch(setLoading(false));
         });
   }, [keyWord])
