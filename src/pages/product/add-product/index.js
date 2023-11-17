@@ -216,7 +216,7 @@ function AddProduct() {
           {photoMessage}
         </span>
         <h5 className={cx("text-center", "mt-3")}>
-          Chỉ cho phép hình ảnh .jpg, .png
+          Chỉ cho phép hình ảnh .jpg, .png, .jfif
         </h5>
       </div>
       <div className={cx("col-md-9", " px-2", "ps-5")}>

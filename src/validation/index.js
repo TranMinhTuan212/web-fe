@@ -100,8 +100,6 @@ function typeFile(file) {
   const type = arr[arr.length - 1];
 
   switch (type) {
-    case "jpg":
-      return true;
     case "png":
       return true;
     // eslint-disable-next-line no-duplicate-case
