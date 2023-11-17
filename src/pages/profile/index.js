@@ -187,12 +187,13 @@ function Profile() {
       axios
         .patch(`${apiLink}user/updateMe`, data, { headers })
         .then((res) => {
-          localStorage.setItem(userKey ,JSON.stringify({ ...user, ...res.data.data }))
+          localStorage.setItem(userKey ,JSON.stringify({ ...user, avatar: res.data.data }))
           setDisabled(true);
         }).then(()=>{
           if(image){
             axios.post(`${apiLink}user/upload-image`, formData, { headers })
           .then((res)=>{
+            localStorage.setItem(userKey ,JSON.stringify({ ...user, avatar: res.data.result }))
             dispatch(setPopup({ type: true, text: res.data?.message }));
             dispatch(setLoading(false));
             setRender(e=>!e)

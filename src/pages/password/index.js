@@ -6,6 +6,10 @@ import { max30, notEmpty, validateForm } from "~/validation";
 import { useState } from "react";
 import { useRef } from "react";
 import { message } from "~/enum";
+import { useGlobalState } from "~/provider/useGlobalState";
+import { setLoading, setPopup } from "~/provider/action";
+import { apiLink, userKey } from "~/key";
+import axios from "axios";
 
 const cx = classNames.bind(styles);
 
@@ -13,6 +17,7 @@ function Password() {
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [,dispatch] = useGlobalState()
 
   const passwordRef = useRef();
   const newPasswordRef = useRef();
@@ -51,10 +56,30 @@ function Password() {
       const data = {
         password: password,
         newPassword: newPassword,
-        confirmPassword: confirmPassword,
+        confirm_password: confirmPassword,
       };
-      console.log(data);
+      const user = JSON.parse(localStorage.getItem(userKey));
+      const headers = {
+        Authorization: "Bearer " + user.accsess_token,
+      };
+      dispatch(setLoading(true));
+      axios.patch(`${apiLink}user/changePassword`, data, { headers })
+      .then((res)=>{
+        dispatch(setLoading(false));
+        dispatch(setPopup({ type: true, text: res.data?.message }));
+        resetInput()
+      })
+      .catch((res)=>{
+        dispatch(setPopup({ type: false, text: res.response.data?.message }));
+        dispatch(setLoading(false));
+      })
     }
+  }
+
+  function resetInput(){
+    setPassword('')
+    setNewPassword('')
+    setConfirmPassword('')
   }
 
   return (
