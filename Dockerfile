@@ -1,31 +1,28 @@
-# Multistage Build: Build stage
-FROM node:16-alpine as builder
+FROM --platform=linux/amd64 node:16-alpine AS BUILD_IMAGE
 
-WORKDIR /frontend
+RUN mkdir -p /home/node/app/
 
-COPY package.json .
+RUN apk add --update vim python3 make g++ && rm -rf /var/cache/apk/* 
 
-# Install npm dependencies
+
+WORKDIR /home/node/app
+
+COPY package*.json ./
+
 RUN npm install
 
 COPY . .
 
-# Build the app
-RUN npm run build
+FROM node:16-alpine
 
-# New stage: Nginx stage
-FROM nginx
+WORKDIR /home/node/app
 
-# Copy built artifacts from the builder stage to Nginx's default public directory
-COPY --from=builder /frontend/build /usr/share/nginx/html
+COPY --from=BUILD_IMAGE /home/node/app .
 
-# Copy Nginx configuration file (adjust the path accordingly)
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+RUN npm install
 
-# Expose port 80 (default for HTTP)
 EXPOSE 3000
 
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+CMD [ "npm" , "start" ]
 
 

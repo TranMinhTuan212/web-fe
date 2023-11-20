@@ -1,12 +1,7 @@
-    version: '3'
-    services:          
-        shoppe-fake:
-            build: 
-                context : .
-                args:
-                    ENV: staging 
-
-            container_name: web-shoppe-fake
-            restart: always
-            ports:
-                - "8080:80"
+version: '3'
+services: 
+  backend:
+    image: 'tranminhtuan212/deploy-fe:2.0.0'
+    ports: 
+      - '3000:3000'
+    restart: 'always'
