@@ -1,6 +1,6 @@
 version: '3'
 services: 
-  backend:
+  frontend:
     image: 'tranminhtuan212/deploy-fe:2.0.0'
     ports: 
       - '3000:3000'
