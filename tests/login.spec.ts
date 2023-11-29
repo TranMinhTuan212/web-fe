@@ -8,7 +8,8 @@ test('Successfully logged in as administrator', async ({ page }) => {
     // Nhập thông tin đăng nhập và nhấn nút đăng nhập
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[1]/input', 'admin@gmail.com');
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[2]/input', 'Tuan123!');
-    await page.click('//*[@id="root"]/div/div/div/div/div/div/div[4]');
+    // await page.click('//*[@id="root"]/div/div/div/div/div/div/div[4]');
+    await page.getByRole('button', { name: 'Đăng Nhập' }).click();
     await page.waitForTimeout(2000);
     // Kiểm tra xem đã chuyển hướng đến trang mong muốn hay chưa
     const currentUrl = page.url();
@@ -24,7 +25,7 @@ test('Successfully logged in as user', async ({ page }) => {
     // Nhập thông tin đăng nhập và nhấn nút đăng nhập
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[1]/input', 'ahah@gmail.com');
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[2]/input', 'Lananh123!');
-    await page.click('//*[@id="root"]/div/div/div/div/div/div/div[4]');
+    await page.getByRole('button', { name: 'Đăng Nhập' }).click();
     await page.waitForTimeout(2000);
     // Kiểm tra xem đã chuyển hướng đến trang mong muốn hay chưa
     const currentUrl = page.url();
@@ -39,7 +40,7 @@ test('Leave all blank', async ({ page }) => {
     // Nhập thông tin đăng nhập và nhấn nút đăng nhập
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[1]/input', '');
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[2]/input', '');
-    await page.click('//*[@id="root"]/div/div/div/div/div/div/div[4]');
+    await page.getByRole('button', { name: 'Đăng Nhập' }).click();
 
 });
 
@@ -51,7 +52,7 @@ test('Leave email blank', async ({ page }) => {
     // Nhập thông tin đăng nhập và nhấn nút đăng nhập
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[1]/input', '');
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[2]/input', 'Lananhne123!');
-    await page.click('//*[@id="root"]/div/div/div/div/div/div/div[4]');
+    await page.getByRole('button', { name: 'Đăng Nhập' }).click();
 
 });
 
@@ -63,7 +64,7 @@ test('Leave password blank', async ({ page }) => {
     // Nhập thông tin đăng nhập và nhấn nút đăng nhập
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[1]/input', 'nguyenngoclananh@gmail.com');
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[2]/input', '');
-    await page.click('//*[@id="root"]/div/div/div/div/div/div/div[4]');
+    await page.getByRole('button', { name: 'Đăng Nhập' }).click();
 
 });
 
@@ -75,7 +76,7 @@ test('Email longer than 50 characters', async ({ page }) => {
     // Nhập thông tin đăng nhập và nhấn nút đăng nhập
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[1]/input', 'nguyenngoclananh@gmail.comnguyenngoclananh@gmail.comnguyenngoclananh@gmail.comnguyenngoclananh@gmail.comnguyenngoclananh.j7p@gmail.com');
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[2]/input', 'Lananh123!');
-    await page.click('//*[@id="root"]/div/div/div/div/div/div/div[4]');
+    await page.getByRole('button', { name: 'Đăng Nhập' }).click();
 
 });
 
@@ -87,7 +88,7 @@ test('Pass longer than 30 characters', async ({ page }) => {
     // Nhập thông tin đăng nhập và nhấn nút đăng nhập
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[1]/input', 'nguyenngoclananh@gmail.com');
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[2]/input', 'Lananh123!Lananh123!Lananh123!Lananh123!Lananh123!Lananh123!Lananh123!Lananh123!Lananh123!Lananh123!Lananh123!Lananh123!Lananh123!Lananh123!');
-    await page.click('//*[@id="root"]/div/div/div/div/div/div/div[4]');
+    await page.getByRole('button', { name: 'Đăng Nhập' }).click();
 
 });
 
@@ -99,7 +100,7 @@ test('Invalid email', async ({ page }) => {
     // Nhập thông tin đăng nhập và nhấn nút đăng nhập
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[1]/input', 'userexample.com');
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[2]/input', 'Lananh123!');
-    await page.click('//*[@id="root"]/div/div/div/div/div/div/div[4]');
+    await page.getByRole('button', { name: 'Đăng Nhập' }).click();
 
 });
 
@@ -112,7 +113,7 @@ test('Wrong login', async ({ page }) => {
     // Nhập thông tin đăng nhập và nhấn nút đăng nhập
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[1]/input', 'ahah@gmail.com');
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[2]/input', 'Lananh1232!');
-    await page.click('//*[@id="root"]/div/div/div/div/div/div/div[4]');
+    await page.getByRole('button', { name: 'Đăng Nhập' }).click();
     await page.waitForTimeout(5000);
 });
 
@@ -123,7 +124,7 @@ test('Enter [Email] with dashes, single quotes, double quotes', async ({ page })
     // Nhập thông tin đăng nhập và nhấn nút đăng nhập
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[1]/input', '"admin-123@gmail.com"');
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[2]/input', 'Lananh123!');
-    await page.click('//*[@id="root"]/div/div/div/div/div/div/div[4]');
+    await page.getByRole('button', { name: 'Đăng Nhập' }).click();
     await page.waitForTimeout(5000);
 });
 
@@ -135,6 +136,6 @@ test('Enter incorrect email', async ({ page }) => {
     // Nhập thông tin đăng nhập và nhấn nút đăng nhập
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[1]/input', 'admi@gmail.com');
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[2]/input', 'Tuan123!');
-    await page.click('//*[@id="root"]/div/div/div/div/div/div/div[4]');
+    await page.getByRole('button', { name: 'Đăng Nhập' }).click();
     await page.waitForTimeout(5000);
 });

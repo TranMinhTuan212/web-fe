@@ -11,7 +11,7 @@ test('Sign Up Success', async ({ page }) => {
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[4]/input', 'Thuy123!');
 
     // Click nút đăng ký
-    await page.click('//*[@id="root"]/div/div/div/div/div/div/div[6]');
+    await page.getByRole('button', { name: 'Đăng Ký' }).click();
 
     // Chờ một khoảng thời gian (tùy thuộc vào trang web của bạn)
     await page.waitForTimeout(3000);
@@ -33,7 +33,7 @@ test('Register an existing account', async ({ page }) => {
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[2]/input', 'Thủy');
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[3]/input', 'Thuy123!');
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[4]/input', 'Thuy123!');
-    await page.click('//*[@id="root"]/div/div/div/div/div/div/div[6]');
+    await page.getByRole('button', { name: 'Đăng Ký' }).click();
 
     // Chờ một khoảng thời gian ngắn để cho thông báo lỗi xuất hiện (nếu có)
     test.setTimeout(60000);
@@ -51,7 +51,7 @@ test('Leave all blank', async ({ page }) => {
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[2]/input', '');
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[3]/input', '');
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[4]/input', '');
-    await page.click('//*[@id="root"]/div/div/div/div/div/div/div[6]');
+    await page.getByRole('button', { name: 'Đăng Ký' }).click();
 
 });
 
@@ -65,7 +65,7 @@ test('Enter email', async ({ page }) => {
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[2]/input', '');
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[3]/input', '');
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[4]/input', '');
-    await page.click('//*[@id="root"]/div/div/div/div/div/div/div[6]');
+    await page.getByRole('button', { name: 'Đăng Ký' }).click();
 
 });
 
@@ -79,7 +79,7 @@ test('Enter name', async ({ page }) => {
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[2]/input', 'lan anh');
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[3]/input', '');
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[4]/input', '');
-    await page.click('//*[@id="root"]/div/div/div/div/div/div/div[6]');
+    await page.getByRole('button', { name: 'Đăng Ký' }).click();
 
 });
 
@@ -93,7 +93,7 @@ test('Enter pass', async ({ page }) => {
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[2]/input', '');
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[3]/input', 'Lananh123!');
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[4]/input', '');
-    await page.click('//*[@id="root"]/div/div/div/div/div/div/div[6]');
+    await page.getByRole('button', { name: 'Đăng Ký' }).click();
 
 });
 
@@ -107,7 +107,7 @@ test('Enter confirm password', async ({ page }) => {
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[2]/input', '');
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[3]/input', '');
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[4]/input', 'Lananh123!');
-    await page.click('//*[@id="root"]/div/div/div/div/div/div/div[6]');
+    await page.getByRole('button', { name: 'Đăng Ký' }).click();
 
 });
 //  [Nhập lại mật khẩu] không trùng với [Mật khẩu], nhập đúng các trường còn lại
@@ -120,6 +120,6 @@ test('Re-enter the password that is not the same', async ({ page }) => {
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[2]/input', 'Lan anh');
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[3]/input', 'Lananh123!');
     await page.fill('//*[@id="root"]/div/div/div/div/div/div/div[4]/input', 'Lananh1234!');
-    await page.click('//*[@id="root"]/div/div/div/div/div/div/div[6]');
+    await page.getByRole('button', { name: 'Đăng Ký' }).click();
 
 });
