@@ -1,4 +1,4 @@
-.wapper{
+.wapper {
     display: flex;
     align-items: center;
     text-align: center;
@@ -11,12 +11,12 @@
     cursor: pointer;
     transition: opacity .2s ease-in-out;
 
-    &:hover{
+    &:hover {
         opacity: .6;
     }
 }
 
-.icon{
+.icon {
     margin-right: 1rem;
     width: 2.4rem;
     height: 2.4rem;
@@ -24,48 +24,48 @@
     align-items: center;
 }
 
-.my-button{
+.my-button {
     color: inherit;
     font-weight: inherit;
 }
 
-.large{
+.large {
     padding: 1rem 4rem;
 }
 
-.textButton{
+.textButton {
     width: 100%;
     border-radius: 0;
     padding: 1rem 1.4rem;
     background-color: var(--pink-lack-color);
     color: var(--text-normal);
 
-    .icon{
+    .icon {
         margin-right: .4rem;
     }
 
-    &:last-child{
+    &:last-child {
         border-bottom: .1rem solid var(--pink-color);
     }
 }
 
-.danger{
+.danger {
     background-color: var(--danger-color);
     color: var(--background-light);
 }
 
-.disable{
+.disable {
     opacity: .8;
 
-    &:hover{
+    &:hover {
         opacity: .8 !important;
     }
 }
 
-.left{
+.left {
     margin-left: 2rem;
 }
 
-.right{
+.right {
     margin-right: 2rem;
 }

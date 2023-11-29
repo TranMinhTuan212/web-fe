@@ -1,11 +1,11 @@
-.wapper{
+.wapper {
     display: flex;
     justify-content: space-between;
     padding: 4rem 0rem;
     color: var(--text-normal);
 }
 
-.photo{
+.photo {
     width: 24rem;
     height: 24rem;
     border: dotted .4rem #ccc;
@@ -16,27 +16,28 @@
     cursor: pointer;
 }
 
-.photo-demo{
+.photo-demo {
     width: 100%;
     height: 100%;
 }
 
-.left{
+.left {
     margin-top: 7rem;
 }
 
-.inputs{
+.inputs {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.button{
+.button {
     margin-top: 7rem;
     display: flex;
     justify-content: end;
 }
-.my-dropdown{
+
+.my-dropdown {
     background-color: var(--hover-max-color);
     border: none !important;
     width: 35rem !important;
@@ -44,15 +45,15 @@
     margin-bottom: 2rem;
     margin-top: 2rem;
 
-    div[role]{
+    div[role] {
         background-color: var(--hover-max-color);
         border: none !important;
         border-radius: .6rem !important;
 
-        span[role]{
+        span[role] {
             border: none !important;
 
-            &:hover{
+            &:hover {
                 background-color: var(--hover-min-color) !important;
             }
         }

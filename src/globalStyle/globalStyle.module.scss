@@ -1,6 +1,4 @@
-
-
-:root{
+:root {
     --pink-color: #9b4de0;
     --pink-lack-color: #300a51;
     --background-001: #120822;
@@ -17,42 +15,43 @@
     --warm-color: #ffd43b;
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
     box-sizing: border-box;
 }
 
-html{
+html {
     font-size: 62.5%;
     user-select: none;
 }
 
-body{
+body {
     font-size: 1.6rem;
     line-height: 1.5;
     text-rendering: optimizeSpeed;
     background-color: var(--background-default);
 }
 
-input{
+input {
     outline: none;
     border: none;
 }
 
-button{
+button {
     outline: none;
     border: none;
     background-color: transparent;
 }
 
-ul, li{
+ul,
+li {
     padding: 0;
     list-style: none;
 }
 
-select{
+select {
     border: none;
     outline: none;
 }
