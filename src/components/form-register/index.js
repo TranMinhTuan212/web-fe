@@ -54,16 +54,16 @@ function FormRegister() {
     if (typeof validateConfirmPassword === "string") {
       flag = false;
       confirmPasswordRef.current.textContent = validateConfirmPassword;
-    }else{
-      if(password !== confirmPassword){
+    } else {
+      if (password !== confirmPassword) {
         flag = false;
         confirmPasswordRef.current.textContent = message.CONFIRM_PASSWORD
       }
     }
 
-    
 
-    if(flag){
+
+    if (flag) {
       const formData = {
         email: email,
         name: name,
@@ -74,9 +74,9 @@ function FormRegister() {
       axios
         .post(`${apiLink}user/register`, formData)
         .then((res) => {
-            dispatch(setLoading(false));
-            navigate(pages.login)
-            dispatch(setPopup({ type: true, text: res.data?.message }));
+          dispatch(setLoading(false));
+          navigate(pages.login)
+          dispatch(setPopup({ type: true, text: res.data?.message }));
         })
         .catch((e) => {
           dispatch(setPopup({ type: false, text: e.response?.data?.message }));

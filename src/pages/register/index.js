@@ -5,15 +5,15 @@ import FormRegister from "~/components/form-register";
 const cx = classNames.bind(style)
 
 function Register() {
-    return ( 
-        <div className={cx("wapper")}>
+  return (
+    <div className={cx("wapper")}>
       <div className={cx("theme")}>
         <div className={cx("form-register")}>
-          <FormRegister/>
+          <FormRegister />
         </div>
       </div>
     </div>
-     );
+  );
 }
 
 export default Register;

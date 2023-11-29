@@ -1,19 +1,19 @@
-.wapper{
+.wapper {
     color: var(--text-normal);
     padding: 1rem 2rem;
 }
 
-.option{
+.option {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
 }
 
-.item{
+.item {
     text-decoration: none;
     color: var(--text-normal);
 
-    &:hover{
+    &:hover {
         color: var(--text-medium);
     }
 }
