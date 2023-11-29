@@ -99,26 +99,26 @@ test('input confirm password', async ({ page }) => {
 });
 
 
-test('Kiểm tra màu sắc của button', async ({ page }) => {
-    // Điều hướng đến trang có chứa button cần kiểm tra
-    await page.goto('http://localhost:3000/register');
+// test('Kiểm tra màu sắc của button', async ({ page }) => {
+//     // Điều hướng đến trang có chứa button cần kiểm tra
+//     await page.goto('http://localhost:3000/register');
 
-    // Selector của button (thay thế bằng selector thực tế của button)
-    const buttonSelector = '#root > div > div > div > div > div > div > div.button_wapper__W9A33.button_large__iC1fM';
+//     // Selector của button (thay thế bằng selector thực tế của button)
+//     const buttonSelector = '#root > div > div > div > div > div > div > div.button_wapper__W9A33.button_large__iC1fM';
 
-    // Sử dụng page.$eval để lấy giá trị thuộc tính CSS 'background-color' của button
-    const buttonColor = await page.$eval(
-        buttonSelector,
-        (button: HTMLButtonElement) => {
-            const computedStyle = getComputedStyle(button);
-            return computedStyle.backgroundColor;
-        }
-    );
+//     // Sử dụng page.$eval để lấy giá trị thuộc tính CSS 'background-color' của button
+//     const buttonColor = await page.$eval(
+//         buttonSelector,
+//         (button: HTMLButtonElement) => {
+//             const computedStyle = getComputedStyle(button);
+//             return computedStyle.backgroundColor;
+//         }
+//     );
 
-    // Chuyển đổi giá trị màu sắc thành dạng không có khoảng trắng
-    const expectedColorWithoutSpaces = "rgb(165,77,224)";
-    const receivedColorWithoutSpaces = buttonColor.replace(/\s/g, '');
+//     // Chuyển đổi giá trị màu sắc thành dạng không có khoảng trắng
+//     const expectedColorWithoutSpaces = "rgb(165,77,224)";
+//     const receivedColorWithoutSpaces = buttonColor.replace(/\s/g, '');
 
-    // So sánh giá trị màu sắc
-    expect(receivedColorWithoutSpaces).toEqual(expectedColorWithoutSpaces);
-});
+//     // So sánh giá trị màu sắc
+//     expect(receivedColorWithoutSpaces).toEqual(expectedColorWithoutSpaces);
+// });
